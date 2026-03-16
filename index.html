@@ -38,7 +38,7 @@
 --accent:#e8e8e8;
 --chrome:linear-gradient(135deg,#555,#bbb 40%,#eee 50%,#bbb 60%,#555);
 --font-display:'Cormorant Garamond',Georgia,serif;--font-body:'DM Sans',sans-serif;
---nav-h:90px;
+--nav-h:75px;
 --focus-ring:0 0 0 2px rgba(192,192,192,0.6);
 --rule:rgba(255,255,255,0.06);
 }
@@ -130,16 +130,16 @@ box-shadow:0 0 40px rgba(255,255,255,0.06);transition:opacity .4s;pointer-events
 ::-webkit-scrollbar-thumb:hover{background:#2a2a2a}
 
 /* ═══════ NAV ═══════ */
-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 56px 0 24px;background:rgba(0,0,0,0.6);backdrop-filter:blur(30px) saturate(1.2);border-bottom:1px solid var(--rule);transition:all .4s}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:rgba(0,0,0,0.6);backdrop-filter:blur(30px) saturate(1.2);border-bottom:1px solid var(--rule);transition:all .4s}
 nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
-.nav-logo{display:flex;align-items:center;gap:0;margin-left:-62px}
-.nav-logo-img{height:120px;width:auto;object-fit:contain;object-position:bottom;filter:drop-shadow(0 0 8px rgba(255,255,255,0.06));margin-bottom:-16px}
-.nav-logo-text{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:8px;line-height:1;display:flex;align-items:center;margin-left:-18px}
+.nav-logo{display:flex;align-items:center;gap:2px;margin-left:-80px}
+.nav-logo-img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,255,255,0.06));margin-top:22px}
+.nav-logo-text{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:8px;line-height:1;display:flex;align-items:center;margin-left:-28px}
 .nav-links{display:flex;gap:36px;align-items:center}
 .nav-links a{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);transition:color .4s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;transition:width .4s cubic-bezier(.16,1,.3,1)}
 .nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}
-.nav-cta{padding:11px 28px 11px 31px!important;border:1px solid rgba(255,255,255,0.15)!important;font-size:10px!important;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--white);transition:all .4s}
+.nav-cta{padding:11px 28px!important;border:1px solid rgba(255,255,255,0.15)!important;font-size:10px!important;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--white);transition:all .4s}
 .nav-cta:hover{background:var(--white);color:var(--black);box-shadow:0 0 30px rgba(255,255,255,0.08)}
 .hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1001;padding:10px;margin:-10px}
 .hamburger span{width:22px;height:1px;background:var(--white);transition:all .4s cubic-bezier(.16,1,.3,1);transform-origin:center}
@@ -555,7 +555,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="popup-modal">
     <button class="popup-close" onclick="closePopup()" aria-label="Close">✕</button>
     <div class="popup-img">
-      <img src="quote.png" alt="Porsche GT3 RS" loading="lazy" decoding="async">
+      <img src="quote.png" alt="Lamborghini Huracán at sunset" loading="lazy" decoding="async">
     </div>
     <div class="popup-content">
       <div class="popup-badge"><span class="dot" aria-hidden="true"></span> Costa Mesa, CA</div>
@@ -696,28 +696,28 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="section-tag reveal">Got Questions?</div>
   <h2 class="section-title reveal">FAQ</h2>
   <div class="faq-grid reveal" role="list">
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a1">What is the minimum age to rent?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a1">What is the minimum age to rent?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a1" role="region" aria-hidden="true">You must be at least 25 years old with a valid driver's license and full coverage insurance to rent from Newport Exotics.</div>
     </div>
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a2">Is a deposit required?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a2">Is a deposit required?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a2" role="region" aria-hidden="true">Yes, a security deposit is required at the time of pickup. The amount varies depending on the vehicle. Contact us for details on specific vehicles.</div>
     </div>
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a3">Can I take the car out of state?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a3">Can I take the car out of state?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a3" role="region" aria-hidden="true">Out-of-state travel may be permitted on a case-by-case basis. Please mention your plans when submitting your inquiry so we can arrange the appropriate coverage.</div>
     </div>
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a4">What insurance do I need?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a4">What insurance do I need?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a4" role="region" aria-hidden="true">You must carry your own full coverage auto insurance policy. We also offer supplemental coverage options — ask us when booking.</div>
     </div>
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a5">How far in advance should I book?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a5">How far in advance should I book?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a5" role="region" aria-hidden="true">We recommend booking at least 48–72 hours in advance, especially for weekends and holidays. Last-minute requests are accommodated when possible.</div>
     </div>
-    <div class="faq-item" role="listitem">
-      <button class="faq-q" onclick="toggleFaq(this.parentElement)" aria-expanded="false" aria-controls="faq-a6">How do I pick up the vehicle?<span aria-hidden="true">+</span></button>
+    <div class="faq-item" role="listitem" onclick="toggleFaq(this)">
+      <button class="faq-q" aria-expanded="false" aria-controls="faq-a6">How do I pick up the vehicle?<span aria-hidden="true">+</span></button>
       <div class="faq-a" id="faq-a6" role="region" aria-hidden="true">All vehicles are picked up directly from our location at 2136 Newport Blvd, Costa Mesa, CA. We'll have everything ready for you at your scheduled time.</div>
     </div>
   </div>
@@ -736,7 +736,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
       <div class="contact-blocks">
         <div class="contact-block"><h4>PHONE</h4><a href="tel:+19497015955">(949) 701-5955</a></div>
         <div class="contact-block"><h4>LOCATION</h4><p>2136 Newport Blvd<br>Costa Mesa, CA 92627</p></div>
-        <div class="contact-block"><h4>EMAIL</h4><a href="/cdn-cgi/l/email-protection#ee808b999e819c9a8c8b8f8d868b96819a878d9dae89838f8782c08d8183"><span class="__cf_email__" data-cfemail="bad4dfcdcad5c8ced8dfdbd9d2dfc2d5ced3d9c9faddd7dbd3d694d9d5d7">[email&#160;protected]</span></a></div>
+        <div class="contact-block"><h4>EMAIL</h4><a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a></div>
         <div class="contact-block"><h4>INSTAGRAM</h4><a href="https://instagram.com/newportexotics_" target="_blank" rel="noopener noreferrer">@newportexotics_</a></div>
         <div class="contact-block"><h4>HOURS</h4><p>Mon – Sat: 9AM – 5PM<br>Sun: 1PM – 3PM</p></div>
       </div>
@@ -812,11 +812,11 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
     <h3>HOW WE USE YOUR INFORMATION</h3>
     <p>We use the information you provide solely to respond to your inquiry, process your rental or service request, and communicate with you about Newport Exotics services. We do not sell, trade, or share your personal information with third parties.</p>
     <h3>CALIFORNIA PRIVACY RIGHTS (CCPA)</h3>
-    <p>If you are a California resident, you have the right to request information about the personal data we collect, request deletion of your personal data, and opt out of any sale of personal information. To exercise these rights, contact us at <a href="/cdn-cgi/l/email-protection#650b0012150a1711070004060d001d0a110c0616250208040c094b060a08"><span class="__cf_email__" data-cfemail="2d43485a5d425f594f484c4e4548554259444e5e6d4a404c4441034e4240">[email&#160;protected]</span></a>.</p>
+    <p>If you are a California resident, you have the right to request information about the personal data we collect, request deletion of your personal data, and opt out of any sale of personal information. To exercise these rights, contact us at <a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a>.</p>
     <h3>COOKIES</h3>
     <p>Our website does not use tracking cookies or third-party analytics at this time.</p>
     <h3>CONTACT US</h3>
-    <p>If you have any questions about this Privacy Policy, please contact us at <a href="/cdn-cgi/l/email-protection#19777c6e69766b6d7b7c787a717c61766d707a6a597e74787075377a7674"><span class="__cf_email__" data-cfemail="bed0dbc9ced1cccadcdbdfddd6dbc6d1cad7ddcdfed9d3dfd7d290ddd1d3">[email&#160;protected]</span></a>.</p>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a>.</p>
   </div>
 </div>
 
@@ -842,7 +842,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="footer-seo">Newport Exotics is a premier exotic car rental company and PPF/car wrap shop located at 2136 Newport Blvd, Costa Mesa, CA. We proudly serve Orange County, Los Angeles, and San Diego with luxury and exotic vehicle rentals including Lamborghini, Ferrari, Rolls-Royce, McLaren, Porsche, Mercedes-Benz, Maybach, Aston Martin, BMW, Audi, Cadillac, and more. Our PPF and wrap services include XPEL paint protection film, full body wraps, color change wraps, chrome delete, and ceramic coating.</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const fleet=[
 {brand:'Rolls-Royce',name:'Cullinan',year:'2022',cat:'luxury',type:'SUV',img:'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?w=600&q=65'},
 {brand:'Rolls-Royce',name:'Cullinan',year:'2024',cat:'luxury',type:'SUV',img:'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?w=600&q=65'},
@@ -1085,4 +1085,17 @@ uploadZone.addEventListener('dragover',function(e){e.preventDefault();uploadZone
 uploadZone.addEventListener('dragleave',function(e){e.preventDefault();uploadZone.classList.remove('dragover');});
 uploadZone.addEventListener('drop',function(e){
   e.preventDefault();
-  uploadZone.classList.remove('dragove
+  uploadZone.classList.remove('dragover');
+  var files=Array.from(e.dataTransfer.files).filter(function(f){return f.type.startsWith('image/')||f.type==='application/pdf';});
+  files.forEach(function(file){if(uploadedFiles.length<4)uploadedFiles.push(file);});
+  renderUploadPreviews();
+});
+
+// Prevent pinch-to-zoom on mobile only
+if('ontouchstart' in window){
+  document.addEventListener('touchmove',function(e){if(e.scale!==undefined&&e.scale!==1){e.preventDefault();}},{passive:false});
+  document.addEventListener('gesturestart',function(e){e.preventDefault();},{passive:false});
+}
+</script>
+</body>
+</html>
