@@ -903,7 +903,7 @@ function renderFleet(){
   let f=currentFilter==='all'?fleet:fleet.filter(c=>c.cat===currentFilter);
   if(!showAll)f=currentFilter==='all'?getFeatured(fleet):f.slice(0,3);
   grid.innerHTML=f.map((c,i)=>`
-<div class="fleet-card reveal ${i<3?'visible':''}" role="listitem">
+<div class="fleet-card" role="listitem">
 <div class="fleet-card-img">
 <img src="${c.img}" alt="${c.brand} ${c.name}${c.year?' '+c.year:''} for rent at Newport Exotics Costa Mesa CA" loading="lazy" decoding="async" width="600" height="400">
 ${c.qty?`<div class="fleet-card-badge">${c.qty} Available</div>`:''}
@@ -937,8 +937,13 @@ function toggleMenu(){
   menu.setAttribute('aria-hidden',!isOpen);
   if(isOpen){menu.querySelector('a').focus();}
 }
-const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// Reveal fallback for local file:// protocol
+if(window.location.protocol === 'file:'){
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+} else {
+  const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.05,rootMargin:'0px 0px 0px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+}
 
 function closePopup(){document.getElementById('quotePopup').classList.remove('active');document.body.style.overflow='';}
 function openPopup(){document.getElementById('quotePopup').classList.add('active');document.body.style.overflow='hidden';}
