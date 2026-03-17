@@ -265,7 +265,7 @@ section{padding:140px 56px;position:relative;scroll-margin-top:-60px}
 .about-value h4{font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;margin-bottom:10px;font-weight:600}
 .about-value p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.75;font-weight:400}
 .about-visual{position:relative;height:620px;overflow:hidden}
-.about-visual img{width:100%;height:100%;object-fit:cover;opacity:.4;filter:contrast(1.1)}
+.about-visual img{width:100%;height:100%;object-fit:cover;opacity:.6;filter:contrast(1.1) brightness(1.15)}
 .about-visual-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.75));display:flex;flex-direction:column;align-items:center;justify-content:center}
 .about-number{font-family:var(--font-display);font-size:88px;letter-spacing:0.04em;font-weight:400}
 .about-number-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:-2px;font-weight:500}
@@ -953,7 +953,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
       <div class="contact-blocks">
         <div class="contact-block"><h4>PHONE</h4><a href="tel:+19497015955">(949) 701-5955</a></div>
         <div class="contact-block"><h4>LOCATION</h4><p>2136 Newport Blvd<br>Costa Mesa, CA 92627</p></div>
-        <div class="contact-block"><h4>EMAIL</h4><a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a></div>
+        <div class="contact-block"><h4>EMAIL</h4><a href="/cdn-cgi/l/email-protection#ed83889a9d829f998f888c8e8588958299848e9ead8a808c8481c38e8280"><span class="__cf_email__" data-cfemail="9ff1fae8eff0edebfdfafefcf7fae7f0ebf6fcecdff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></a></div>
         <div class="contact-block"><h4>INSTAGRAM</h4><a href="https://instagram.com/newportexotics_" target="_blank" rel="noopener noreferrer">@newportexotics_</a></div>
         <div class="contact-block"><h4>HOURS</h4><p>Mon – Sat: 9AM – 5PM<br>Sun: 1PM – 3PM</p></div>
       </div>
@@ -1048,11 +1048,11 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
     <h3>HOW WE USE YOUR INFORMATION</h3>
     <p>We use the information you provide solely to respond to your inquiry, process your rental or service request, and communicate with you about Newport Exotics services. We do not sell, trade, or share your personal information with third parties.</p>
     <h3>CALIFORNIA PRIVACY RIGHTS (CCPA)</h3>
-    <p>If you are a California resident, you have the right to request information about the personal data we collect, request deletion of your personal data, and opt out of any sale of personal information. To exercise these rights, contact us at <a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a>.</p>
+    <p>If you are a California resident, you have the right to request information about the personal data we collect, request deletion of your personal data, and opt out of any sale of personal information. To exercise these rights, contact us at <a href="/cdn-cgi/l/email-protection#c1afa4b6b1aeb3b5a3a4a0a2a9a4b9aeb5a8a2b281a6aca0a8adefa2aeac"><span class="__cf_email__" data-cfemail="325c5745425d4046505753515a574a5d465b514172555f535b5e1c515d5f">[email&#160;protected]</span></a>.</p>
     <h3>COOKIES</h3>
     <p>Our website does not use tracking cookies or third-party analytics at this time.</p>
     <h3>CONTACT US</h3>
-    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a>.</p>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="/cdn-cgi/l/email-protection#315f5446415e4345535450525954495e4558524271565c50585d1f525e5c"><span class="__cf_email__" data-cfemail="91fff4e6e1fee3e5f3f4f0f2f9f4e9fee5f8f2e2d1f6fcf0f8fdbff2fefc">[email&#160;protected]</span></a>.</p>
   </div>
 </div>
 
@@ -1078,7 +1078,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="footer-seo">Newport Exotics is a premier exotic car rental company and PPF/car wrap shop located at 2136 Newport Blvd, Costa Mesa, CA. We proudly serve Orange County, Los Angeles, and San Diego with luxury and exotic vehicle rentals including Lamborghini, Ferrari, Rolls-Royce, McLaren, Porsche, Mercedes-Benz, Maybach, Aston Martin, BMW, Audi, Cadillac, and more. Our PPF and wrap services include XPEL paint protection film, full body wraps, color change wraps, chrome delete, and ceramic coating.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const fleet=[
 // Lamborghini
 {brand:'Lamborghini',name:'Urus',year:'2021',cat:'supercar',type:'SUV',color:'Red',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
@@ -1622,20 +1622,4 @@ function testiPrev(){
 function updateTestiTrack(){
   if(!testiTrack)return;
   var vis=getTestiVisible();
-  var shift=testiIndex*(100/vis);
-  testiTrack.style.transform='translateX(-'+shift+'%)';
-}
-window.addEventListener('resize',function(){
-  var max=getTestiTotal()-getTestiVisible();
-  if(testiIndex>max)testiIndex=Math.max(0,max);
-  updateTestiTrack();
-});
-
-// Prevent pinch-to-zoom on mobile only
-if('ontouchstart' in window){
-  document.addEventListener('touchmove',function(e){if(e.scale!==undefined&&e.scale!==1){e.preventDefault();}},{passive:false});
-  document.addEventListener('gesturestart',function(e){e.preventDefault();},{passive:false});
-}
-</script>
-</body>
-</html>
+  va
