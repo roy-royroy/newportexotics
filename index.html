@@ -47,7 +47,7 @@
 .skip-nav{position:absolute;top:-100%;left:16px;z-index:10000;padding:12px 24px;background:var(--white);color:var(--black);font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:top .2s}
 .skip-nav:focus{top:12px}
 
-html{scroll-behavior:smooth;scroll-padding-top:0;-webkit-tap-highlight-color:transparent;text-size-adjust:100%;-webkit-text-size-adjust:100%;touch-action:pan-x pan-y;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:0px;-webkit-tap-highlight-color:transparent;text-size-adjust:100%;-webkit-text-size-adjust:100%;touch-action:pan-x pan-y;overflow-x:hidden}
 body{font-family:var(--font-body);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:0.01em}
 a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
@@ -132,15 +132,15 @@ box-shadow:0 0 40px rgba(255,255,255,0.06);transition:opacity .4s;pointer-events
 /* ═══════ NAV ═══════ */
 nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:rgba(0,0,0,0.6);backdrop-filter:blur(30px) saturate(1.2);border-bottom:1px solid var(--rule);transition:all .4s}
 nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
-.nav-logo{display:flex;align-items:center;gap:2px;margin-left:-80px}
-.nav-logo-img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,255,255,0.06));margin-top:22px}
-.nav-logo-text{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:8px;line-height:1;display:flex;align-items:center;margin-left:-28px}
+.nav-logo{display:flex;align-items:center;gap:2px;margin-left:-80px;overflow:hidden;height:var(--nav-h)}
+.nav-logo-img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,255,255,0.06));margin-top:22px;pointer-events:auto}
+.nav-logo-text{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:8px;line-height:1;display:flex;align-items:center;margin-left:-28px}
 .nav-links{display:flex;gap:36px;align-items:center}
 .nav-links a{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);transition:color .4s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;transition:width .4s cubic-bezier(.16,1,.3,1)}
 .nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}
 .nav-cta{padding:11px 28px!important;border:1px solid rgba(255,255,255,0.15)!important;font-size:10px!important;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--white);transition:all .4s}
-.nav-cta:hover{background:var(--white);color:var(--black);box-shadow:0 0 30px rgba(255,255,255,0.08)}
+.nav-cta:hover{background:rgba(255,255,255,0.08);color:var(--white);border-color:var(--white) !important;box-shadow:0 0 30px rgba(255,255,255,0.08)}
 .hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1001;padding:10px;margin:-10px}
 .hamburger span{width:22px;height:1px;background:var(--white);transition:all .4s cubic-bezier(.16,1,.3,1);transform-origin:center}
 .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -178,7 +178,7 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══════ SECTIONS ═══════ */
-section{padding:140px 56px;position:relative;scroll-margin-top:0}
+section{padding:140px 56px;position:relative;scroll-margin-top:-60px}
 .section-tag{font-size:14px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:20px;font-weight:600}
 .section-title{font-family:var(--font-display);font-size:clamp(40px,5.5vw,72px);letter-spacing:0.02em;margin-bottom:20px;font-weight:400;line-height:1}
 .section-sub{font-size:17px;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.85;font-weight:400}
@@ -213,7 +213,7 @@ section{padding:140px 56px;position:relative;scroll-margin-top:0}
 .policy-item p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;font-weight:400}
 
 /* ═══════ FLEET ═══════ */
-#fleet{background:var(--dark)}
+#fleet{background:var(--dark);scroll-margin-top:-120px}
 .fleet-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:56px}
 .fleet-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px}
 .fleet-filter{padding:10px 24px;border:1px solid rgba(255,255,255,0.08);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:all .4s;cursor:pointer;background:none}
@@ -238,7 +238,7 @@ section{padding:140px 56px;position:relative;scroll-margin-top:0}
 .fleet-show-all{text-align:center;margin-top:56px}
 
 /* ═══════ SERVICES ═══════ */
-#services{background:var(--black)}
+#services{background:var(--black);scroll-margin-top:-80px}
 .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:56px}
 .service-card{border:none;background:var(--dark);position:relative;overflow:hidden;transition:all .5s;display:flex;flex-direction:column}
 .service-card:hover{background:var(--dark2)}
@@ -487,7 +487,7 @@ nav{padding:0 100px}
 }
 
 @media(max-width:768px){
-section{padding:100px 24px;scroll-margin-top:0}
+section{padding:100px 24px;scroll-margin-top:-40px}
 nav{padding:0 24px}
 footer{padding:40px 24px}
 .nav-links{display:none}
@@ -750,7 +750,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <h2 class="section-title reveal">SERVICES</h2>
   <div class="section-sub reveal">Two core specialties. One standard of excellence.</div>
   <div class="services-grid">
-    <article class="service-card reveal">
+    <article class="service-card reveal" onclick="window.location.href='#fleet'" style="cursor:pointer">
       <div class="service-card-img">
         <img src="https://images.unsplash.com/photo-1621135802920-133df287f89c?w=800&q=70&fm=webp" alt="Lamborghini Urus exotic car available for rent at Newport Exotics Orange County" loading="lazy" decoding="async" width="800" height="500">
       </div>
