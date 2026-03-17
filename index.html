@@ -213,12 +213,12 @@ section{padding:140px 56px;position:relative;scroll-margin-top:-60px}
 .policy-item p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;font-weight:400}
 
 /* ═══════ FLEET ═══════ */
-#fleet{background:var(--dark);scroll-margin-top:-120px}
+#fleet{background:var(--dark);scroll-margin-top:-120px;overflow:visible}
 .fleet-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:56px}
 .fleet-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:40px}
 .fleet-filter{padding:10px 24px;border:1px solid rgba(255,255,255,0.08);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:all .4s;cursor:pointer;background:none}
 .fleet-filter.active,.fleet-filter:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,0.04)}
-.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative;z-index:1}
 .fleet-card{background:var(--dark2);border:none;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;cursor:pointer;contain:layout style}
 .fleet-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.6)}
 .fleet-card-img{height:300px;background:var(--dark3);position:relative;overflow:hidden}
@@ -594,12 +594,31 @@ nav{padding:0 16px}
 
 /* Overflow containment */
 *{max-width:100%}
+.brand-filter-dropdown{max-width:none}
 img,iframe,video{max-width:100%}
 /* ═══════ INVENTORY TABLE ═══════ */
-.inv-controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.inv-controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;align-items:center;position:relative;z-index:300;overflow:visible}
 .inv-search{padding:14px 24px;background:rgba(255,255,255,0.03);border:1px solid var(--rule);color:var(--white);font-family:var(--font-body);font-size:15px;width:100%;max-width:400px;outline:none;transition:border-color .3s}
 .inv-search:focus{border-color:rgba(255,255,255,0.25)}
 .inv-search::placeholder{color:rgba(255,255,255,0.2)}
+.brand-filter-wrap{position:relative;margin-left:auto;z-index:300}
+.brand-filter-btn{padding:14px 24px;background:rgba(255,255,255,0.03);border:1px solid var(--rule);color:rgba(255,255,255,0.5);font-family:var(--font-body);font-size:13px;font-weight:500;letter-spacing:1px;cursor:pointer;transition:all .3s;display:flex;align-items:center;white-space:nowrap}
+.brand-filter-btn:hover,.brand-filter-btn.active{border-color:rgba(255,255,255,0.25);color:var(--white)}
+.brand-filter-dropdown{position:fixed;width:420px;background:var(--dark2);border:1px solid rgba(255,255,255,0.1);z-index:9000;display:none;box-shadow:0 24px 64px rgba(0,0,0,0.6);max-width:none}
+.brand-filter-dropdown.open{display:block}
+.brand-filter-list{max-height:400px;overflow-y:auto;padding:6px 0;display:grid;grid-template-columns:1fr 1fr}
+.brand-filter-item{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;transition:background .2s;font-size:13px;color:rgba(255,255,255,0.7);white-space:nowrap}
+.brand-filter-item:hover{background:rgba(255,255,255,0.03)}
+.brand-filter-item.checked{color:var(--white)}
+.bf-checkbox{width:16px;height:16px;border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:transparent;transition:all .2s}
+.brand-filter-item.checked .bf-checkbox{border-color:var(--white);background:rgba(255,255,255,0.1);color:var(--white)}
+.bf-count{font-size:11px;color:rgba(255,255,255,0.25);margin-left:6px}
+.brand-filter-actions{display:flex;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--rule)}
+.brand-filter-clear{font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer;background:none;border:none;font-family:var(--font-body);transition:color .2s;padding:0}
+.brand-filter-clear:hover{color:var(--white)}
+.brand-filter-apply{font-size:12px;color:var(--black);background:var(--white);border:none;padding:8px 20px;cursor:pointer;font-family:var(--font-body);font-weight:600;letter-spacing:1px;transition:background .2s}
+.brand-filter-apply:hover{background:var(--silver)}
+@media(max-width:600px){.brand-filter-wrap{margin-left:0;width:100%}.brand-filter-btn{width:100%;justify-content:center}.brand-filter-dropdown{width:90vw}.brand-filter-list{grid-template-columns:1fr}}
 .inv-count{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px}
 
 /* ═══════ DELIVERY RATES ═══════ */
@@ -805,6 +824,9 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   </div>
   <div class="inv-controls reveal" id="searchWrap" style="margin-top:0;margin-bottom:24px">
     <input type="text" class="inv-search" id="invSearch" placeholder="Search by brand, model, year, or color..." oninput="searchFleet()">
+    <div class="brand-filter-wrap" id="brandFilterWrap">
+      <button class="brand-filter-btn" onclick="toggleBrandFilter()" id="brandFilterBtn">Filter by Brand <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
   </div>
   <div class="inv-count reveal" id="invCount"></div>
   <div class="fleet-grid" id="fleetGrid" role="list" aria-live="polite"></div>
@@ -816,7 +838,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 <!-- DELIVERY RATES -->
 <section id="rates" aria-label="Delivery Rates">
   <div class="section-tag reveal">Delivery Service</div>
-  <h2 class="section-title reveal">DROP-OFF RATES</h2>
+  <h2 class="section-title reveal">DROP<span style="font-family:Arial,sans-serif;margin:0 2px">-</span>OFF RATES</h2>
   <div class="section-sub reveal">All rates based on mileage from our Costa Mesa facility. Clients cover driver pay and return ride.</div>
   <div class="rates-grid reveal">
     <div class="rates-col">
@@ -1078,6 +1100,14 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="footer-seo">Newport Exotics is a premier exotic car rental company and PPF/car wrap shop located at 2136 Newport Blvd, Costa Mesa, CA. We proudly serve Orange County, Los Angeles, and San Diego with luxury and exotic vehicle rentals including Lamborghini, Ferrari, Rolls-Royce, McLaren, Porsche, Mercedes-Benz, Maybach, Aston Martin, BMW, Audi, Cadillac, and more. Our PPF and wrap services include XPEL paint protection film, full body wraps, color change wraps, chrome delete, and ceramic coating.</div>
 </footer>
 
+<div class="brand-filter-dropdown" id="brandFilterDropdown">
+  <div class="brand-filter-list" id="brandFilterList"></div>
+  <div class="brand-filter-actions">
+    <button class="brand-filter-clear" onclick="clearBrandFilters()">Clear All</button>
+    <button class="brand-filter-apply" onclick="applyBrandFilters()">Apply</button>
+  </div>
+</div>
+
 <script>
 const fleet=[
 // Lamborghini
@@ -1183,9 +1213,84 @@ fleet.sort(function(a,b){return a.brand.localeCompare(b.brand)||a.name.localeCom
 
 var currentFilter='all';
 var searchQuery='';
-var viewState='initial'; // 'initial' | 'more' | 'all'
-var ROW1=9; // 3 rows of 3
-var ROW2=18; // 6 rows of 3
+var viewState='initial';
+var ROW1=9;
+var ROW2=18;
+var selectedBrands=[];
+
+// Build brand filter checkboxes
+var fleetBrands=[];
+fleet.forEach(function(c){if(fleetBrands.indexOf(c.brand)===-1)fleetBrands.push(c.brand);});
+fleetBrands.sort();
+(function(){
+  var list=document.getElementById('brandFilterList');
+  list.innerHTML=fleetBrands.map(function(b){
+    var count=fleet.filter(function(c){return c.brand===b;}).length;
+    return '<div class="brand-filter-item" onclick="toggleBrandFilterItem(this,\''+b.replace(/'/g,"\\'")+'\')">'+ 
+      '<span class="bf-checkbox"></span>'+b+'<span class="bf-count">'+count+'</span></div>';
+  }).join('');
+})();
+
+function positionBrandDropdown(){
+  var dd=document.getElementById('brandFilterDropdown');
+  var btn=document.getElementById('brandFilterBtn');
+  if(!dd.classList.contains('open'))return;
+  var rect=btn.getBoundingClientRect();
+  var ddWidth=dd.offsetWidth||420;
+  var left=rect.right-ddWidth;
+  if(left<8)left=8;
+  dd.style.top=(rect.bottom+2)+'px';
+  dd.style.left=left+'px';
+}
+function toggleBrandFilter(){
+  var dd=document.getElementById('brandFilterDropdown');
+  var btn=document.getElementById('brandFilterBtn');
+  var isOpen=dd.classList.toggle('open');
+  btn.classList.toggle('active');
+  if(isOpen)positionBrandDropdown();
+}
+window.addEventListener('scroll',positionBrandDropdown);
+window.addEventListener('resize',positionBrandDropdown);
+function toggleBrandFilterItem(el,brand){
+  var idx=selectedBrands.indexOf(brand);
+  if(idx>-1){
+    selectedBrands.splice(idx,1);
+    el.classList.remove('checked');
+    el.querySelector('.bf-checkbox').textContent='';
+  } else {
+    selectedBrands.push(brand);
+    el.classList.add('checked');
+    el.querySelector('.bf-checkbox').textContent='✓';
+  }
+}
+function clearBrandFilters(){
+  selectedBrands=[];
+  document.querySelectorAll('.brand-filter-item').forEach(function(el){
+    el.classList.remove('checked');
+    el.querySelector('.bf-checkbox').textContent='';
+  });
+  applyBrandFilters();
+}
+function applyBrandFilters(){
+  viewState='initial';
+  document.getElementById('brandFilterDropdown').classList.remove('open');
+  document.getElementById('brandFilterBtn').classList.remove('active');
+  var btn=document.getElementById('brandFilterBtn');
+  btn.textContent=selectedBrands.length>0?'Brands ('+selectedBrands.length+')':'Filter by Brand';
+  var svg='<svg width="10" height="10" viewBox="0 0 12 12" fill="none" style="margin-left:6px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  btn.innerHTML=(selectedBrands.length>0?'Brands ('+selectedBrands.length+')':'Filter by Brand')+' '+svg;
+  renderFleet();
+}
+
+// Close brand filter on outside click
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('brandFilterWrap');
+  var dd=document.getElementById('brandFilterDropdown');
+  if(wrap&&dd&&!wrap.contains(e.target)&&!dd.contains(e.target)){
+    dd.classList.remove('open');
+    document.getElementById('brandFilterBtn').classList.remove('active');
+  }
+});
 
 function renderFleet(){
   var grid=document.getElementById('fleetGrid');
@@ -1193,6 +1298,10 @@ function renderFleet(){
 
   if(currentFilter!=='all'){
     data=data.filter(function(c){return c.cat===currentFilter;});
+  }
+
+  if(currentFilter==='all'&&selectedBrands.length>0){
+    data=data.filter(function(c){return selectedBrands.indexOf(c.brand)!==-1;});
   }
 
   if(currentFilter==='all'&&searchQuery){
@@ -1250,6 +1359,10 @@ function filterFleet(cat,btn){
   currentFilter=cat;
   searchQuery='';
   viewState='initial';
+  selectedBrands=[];
+  document.querySelectorAll('.brand-filter-item').forEach(function(el){el.classList.remove('checked');el.querySelector('.bf-checkbox').textContent='';});
+  var bfBtn=document.getElementById('brandFilterBtn');
+  bfBtn.innerHTML='Filter by Brand <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style="margin-left:6px"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   document.getElementById('invSearch').value='';
   document.querySelectorAll('.fleet-filter').forEach(function(b){b.classList.remove('active');b.setAttribute('aria-pressed','false');});
   btn.classList.add('active');btn.setAttribute('aria-pressed','true');
