@@ -43,6 +43,50 @@
 --rule:rgba(255,255,255,0.06);
 }
 
+/* SCANLINE OVERLAY */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);
+opacity:.5}
+
+/* AMBIENT SECTION GLOWS */
+#about::before,#fleet::before,#services::before,#testimonials::before{
+content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+width:800px;height:500px;border-radius:50%;pointer-events:none;z-index:0;
+background:radial-gradient(ellipse,rgba(255,255,255,0.03),transparent 70%);
+animation:ambientPulse 6s ease-in-out infinite}
+#fleet::before{top:auto;bottom:-200px;background:radial-gradient(ellipse,rgba(255,255,255,0.02),transparent 70%)}
+#services::before{width:600px;height:400px;top:-150px}
+#testimonials::before{width:700px;height:400px}
+@keyframes ambientPulse{0%,100%{opacity:.4;filter:blur(20px)}50%{opacity:.8;filter:blur(30px)}}
+
+/* FLEET CARD HOVER GLOW */
+.fleet-card::after{content:'';position:absolute;inset:-1px;z-index:-1;opacity:0;
+background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent,rgba(255,255,255,0.04));
+transition:opacity .5s;pointer-events:none}
+.fleet-card:hover::after{opacity:1}
+
+/* FLEET CARD IMAGE SHINE */
+.fleet-card-img::before{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+z-index:2;transform:skewX(-25deg);pointer-events:none}
+.fleet-card:hover .fleet-card-img::before{animation:imgShine .8s ease forwards}
+@keyframes imgShine{0%{left:-75%}100%{left:125%}}
+
+/* SERVICE CARD LIGHT SWEEP */
+.service-card::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);
+pointer-events:none;z-index:1}
+.service-card:hover::after{animation:lightSweep .9s ease forwards}
+@keyframes lightSweep{0%{left:-100%}100%{left:200%}}
+
+/* ABOUT VALUE HOVER ACCENT */
+.about-value{transition:all .3s;position:relative;overflow:hidden}
+.about-value:hover{border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.02);transform:translateY(-2px)}
+.about-value::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;
+background:linear-gradient(180deg,rgba(255,255,255,0.4),rgba(255,255,255,0.1));transform:scaleY(0);
+transition:transform .3s;transform-origin:top}
+.about-value:hover::before{transform:scaleY(1)}
+
 /* SKIP NAV */
 .skip-nav{position:absolute;top:-100%;left:16px;z-index:10000;padding:12px 24px;background:var(--white);color:var(--black);font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:top .2s}
 .skip-nav:focus{top:12px}
@@ -123,7 +167,7 @@ box-shadow:0 0 40px rgba(255,255,255,0.06);transition:opacity .4s;pointer-events
 .btn-primary:hover::after{opacity:1}
 
 /* NAV LINK SHIMMER */
-.nav-links a::after{background:linear-gradient(90deg,transparent,var(--white),transparent)}
+.nav-links a::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.55),transparent)}
 
 /* SCROLLBAR POLISH */
 ::-webkit-scrollbar-thumb{background:#1a1a1a}
@@ -139,8 +183,8 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
 .nav-links a{font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);transition:color .4s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;transition:width .4s cubic-bezier(.16,1,.3,1)}
 .nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}
-.nav-cta{padding:11px 28px!important;border:1px solid rgba(255,255,255,0.15)!important;font-size:10px!important;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--white);transition:all .4s}
-.nav-cta:hover{background:rgba(255,255,255,0.08);color:var(--white);border-color:var(--white) !important;box-shadow:0 0 30px rgba(255,255,255,0.08)}
+.nav-cta{padding:11px 28px!important;border:1px solid rgba(255,255,255,0.2)!important;font-size:10px!important;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--white);transition:all .4s}
+.nav-cta:hover{background:rgba(255,255,255,0.06);color:var(--white);border-color:var(--white)!important;box-shadow:0 0 30px rgba(255,255,255,0.08)}
 .hamburger{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1001;padding:10px;margin:-10px}
 .hamburger span{width:22px;height:1px;background:var(--white);transition:all .4s cubic-bezier(.16,1,.3,1);transform-origin:center}
 .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -155,7 +199,7 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:var(--nav-h) 56px 80px}
 .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1920&q=75&fm=webp') center/cover no-repeat;overflow:hidden;clip-path:inset(0)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.35) 35%,rgba(0,0,0,0.5) 65%,rgba(0,0,0,0.92) 100%)}
-.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),transparent 70%);top:20%;left:50%;transform:translateX(-50%);pointer-events:none}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.04),rgba(255,255,255,0.02) 40%,transparent 70%);top:20%;left:50%;transform:translateX(-50%);pointer-events:none;filter:blur(40px)}
 .hero-line{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)}
 .hero-content{position:relative;z-index:2;text-align:center;max-width:960px}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 28px;border:1px solid rgba(255,255,255,0.15);margin-bottom:28px;font-size:14px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.7);animation:fadeUp .8s ease both;background:rgba(0,0,0,0.3);backdrop-filter:blur(8px)}
@@ -180,9 +224,10 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
 /* ═══════ SECTIONS ═══════ */
 section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .section-tag{font-size:14px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:20px;font-weight:600}
-.section-title{font-family:var(--font-display);font-size:clamp(40px,5.5vw,72px);letter-spacing:0.02em;margin-bottom:20px;font-weight:400;line-height:1}
+.section-title{font-family:var(--font-display);font-size:clamp(40px,5.5vw,72px);letter-spacing:0.02em;margin-bottom:20px;font-weight:400;line-height:1;position:relative;display:inline-block}
+.section-title::after{content:'';display:block;width:60px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.4),transparent);margin-top:16px}
 .section-sub{font-size:17px;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.85;font-weight:400}
-.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent 5%,rgba(255,255,255,0.06) 30%,rgba(255,255,255,0.06) 70%,transparent 95%);margin:8px 0}
 
 /* ═══════ BRANDS ═══════ */
 .brands{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:18px 0;overflow:hidden;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border-top:1px solid var(--rule)}
@@ -211,6 +256,27 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .policy-item{background:var(--dark);padding:32px 36px}
 .policy-item h4{font-family:var(--font-display);font-size:20px;letter-spacing:0.02em;font-weight:500;margin-bottom:8px}
 .policy-item p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;font-weight:400}
+
+/* ═══════ HOW IT WORKS ═══════ */
+#process{background:var(--black)}
+.process-grid{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-top:20px}
+.process-step{flex:1;max-width:300px;text-align:center;padding:32px 24px;position:relative}
+.process-num{font-family:var(--font-display);font-size:56px;font-weight:300;color:rgba(255,255,255,0.06);line-height:1;margin-bottom:16px}
+.process-icon{width:56px;height:56px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
+.process-icon svg{width:24px;height:24px;color:rgba(255,255,255,0.6)}
+.process-step:hover .process-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.process-step:hover .process-icon svg{color:var(--white)}
+.process-step h3{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:0.03em;margin-bottom:12px}
+.process-step p{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75}
+.process-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);margin-top:100px;flex-shrink:0}
+@media(max-width:768px){.process-grid{flex-direction:column;align-items:center}.process-line{width:1px;height:40px;margin:0;background:linear-gradient(180deg,transparent,rgba(255,255,255,0.12),transparent)}}
+
+/* ═══════ INSTAGRAM CTA ═══════ */
+.insta-cta{padding:20px 0}
+.insta-icon{margin:0 auto 16px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+.insta-icon svg{color:rgba(255,255,255,0.6)}
+.insta-tag{font-family:var(--font-display);font-size:16px;letter-spacing:3px;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.insta-desc{font-size:16px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto;line-height:1.75}
 
 /* ═══════ FLEET ═══════ */
 #fleet{background:var(--dark);scroll-margin-top:-120px;overflow:visible}
@@ -262,6 +328,10 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .about-text p{font-size:18px;color:rgba(255,255,255,0.7);line-height:2;font-weight:400;margin-bottom:28px}
 .about-values{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px}
 .about-value{padding:32px;border:none;background:rgba(255,255,255,0.015)}
+.about-value-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:20px}
+.about-value-icon svg{width:22px;height:22px;color:rgba(255,255,255,0.6)}
+.about-value:hover .about-value-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
+.about-value:hover .about-value-icon svg{color:var(--white)}
 .about-value h4{font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;margin-bottom:10px;font-weight:600}
 .about-value p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.75;font-weight:400}
 .about-visual{position:relative;height:620px;overflow:hidden}
@@ -277,10 +347,11 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .testi-arrow:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,0.04)}
 .testi-track-wrap{overflow:hidden;flex:1}
 .testi-track{display:flex;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.testimonial-card{width:33.333%;padding:40px 36px;background:var(--dark);position:relative;display:flex;flex-direction:column;gap:16px;flex-shrink:0;box-sizing:border-box;border-right:2px solid var(--black);border-top:2px solid rgba(192,192,192,0.15);overflow:hidden}
+.testimonial-card{width:33.333%;padding:40px 36px;background:var(--dark);position:relative;display:flex;flex-direction:column;gap:16px;flex-shrink:0;box-sizing:border-box;border-right:2px solid var(--black);border-top:2px solid rgba(192,192,192,0.15);border-left:2px solid transparent;overflow:hidden;transition:border-left-color .3s}
+.testimonial-card:hover{border-left-color:rgba(255,255,255,0.2)}
 .testimonial-card:last-child{border-right:none}
 .testimonial-card::before{content:'"';font-family:var(--font-display);font-size:120px;font-weight:300;color:rgba(255,255,255,0.04);position:absolute;top:-20px;right:20px;line-height:1;pointer-events:none}
-.testimonial-stars{color:var(--silver);font-size:13px;letter-spacing:3px}
+.testimonial-stars{color:var(--silver);display:flex;gap:4px}
 .testimonial-text{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.85;font-weight:400;font-style:italic;flex:1}
 .testimonial-author{padding-top:20px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:16px}
 .testimonial-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:16px;font-weight:500;color:rgba(255,255,255,0.5);flex-shrink:0;border:1px solid rgba(255,255,255,0.06)}
@@ -300,16 +371,20 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 
 /* ═══════ CONTACT ═══════ */
 #contact{background:var(--dark)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:20px;border:1px solid var(--rule)}
-.contact-info{display:flex;flex-direction:column;justify-content:space-between;padding:60px 52px;border-right:1px solid var(--rule);gap:0}
-.contact-info-top{margin-bottom:28px}
-.contact-info-top p{font-size:17px;color:rgba(255,255,255,0.65);font-weight:400;line-height:1.85;max-width:340px}
-.contact-blocks{display:flex;flex-direction:column;gap:0}
-.contact-block{padding:20px 0;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
-.contact-block h4{font-family:var(--font-body);font-size:11px;letter-spacing:4px;font-weight:600;color:rgba(255,255,255,0.45);margin:0;text-transform:uppercase}
-.contact-block p,.contact-block a{font-size:16px;color:rgba(255,255,255,0.85);font-weight:400;line-height:1.6;text-align:right}
-.contact-block a:hover{color:var(--white)}
-.contact-form{display:flex;flex-direction:column;gap:0;padding:60px 52px;background:rgba(255,255,255,0.01)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:20px}
+.contact-form{display:flex;flex-direction:column;gap:0;padding:0;background:transparent;border:1px solid var(--rule)}
+.contact-right{display:flex;flex-direction:column;gap:2px}
+.contact-map{height:360px;overflow:hidden;border:1px solid var(--rule)}
+.contact-map iframe{width:100%;height:100%;border:0;filter:grayscale(0.3) brightness(0.9)}
+.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.contact-card{display:flex;align-items:center;gap:16px;padding:24px 28px;background:var(--dark2);transition:background .3s;text-decoration:none;color:inherit}
+.contact-card:hover{background:rgba(255,255,255,0.03)}
+.contact-card-icon{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,0.02);transition:all .3s}
+.contact-card-icon svg{width:20px;height:20px;color:rgba(255,255,255,0.5)}
+.contact-card:hover .contact-card-icon{border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05)}
+.contact-card:hover .contact-card-icon svg{color:var(--white)}
+.contact-card h4{font-family:var(--font-body);font-size:10px;letter-spacing:3px;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:4px}
+.contact-card p{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.5}
 .form-row{display:flex;gap:0}
 .form-field{flex:1;display:flex;flex-direction:column;gap:0}
 .form-field label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);padding:18px 20px 8px;font-weight:600}
@@ -331,6 +406,8 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .custom-select-option.selected{color:var(--white);background:rgba(255,255,255,0.03)}
 .form-submit{padding:22px;background:var(--white);color:var(--black);font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;transition:all .4s;width:100%;border:none;cursor:pointer;font-family:var(--font-body)}
 .form-submit:hover{background:var(--silver);letter-spacing:6px}
+@media(max-width:1024px){.contact-layout{grid-template-columns:1fr}.contact-map{height:280px}}
+@media(max-width:600px){.contact-cards{grid-template-columns:1fr}.contact-card{padding:20px 24px}}
 
 /* ═══════ VEHICLE PICKER ═══════ */
 .vehicle-picker-field{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s cubic-bezier(.16,1,.3,1),opacity .4s ease;margin:0 !important}
@@ -405,7 +482,7 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 }
 
 /* ═══════ MAP ═══════ */
-.map-section{padding:0 56px 100px;background:var(--dark)}
+.map-section{padding:0 56px 60px;background:var(--dark)}
 .map-container{width:100%;height:420px;border:1px solid var(--rule);overflow:hidden;filter:grayscale(1) brightness(0.6) contrast(1.2);opacity:0.85;transition:filter .6s,opacity .6s}
 .map-container:hover{filter:grayscale(0.5) brightness(0.7);opacity:1}
 .map-container iframe{width:100%;height:100%;border:0}
@@ -426,7 +503,14 @@ section{padding:24px 56px;position:relative;scroll-margin-top:-60px}
 .privacy-date{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-bottom:28px}
 
 /* ═══════ FOOTER ═══════ */
-footer{background:var(--black);border-top:1px solid var(--rule);padding:56px}
+footer{background:var(--black);border-top:1px solid var(--rule);padding:0 56px 56px}
+.footer-top{text-align:center;padding:32px 0}
+.back-to-top{display:inline-flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
+.back-to-top:hover{color:var(--white)}
+.back-to-top svg{transition:transform .3s}
+.back-to-top:hover svg{transform:translateY(-4px)}
+.footer-ig-cta{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:rgba(255,255,255,0.5);transition:color .3s}
+.footer-ig-cta:hover{color:var(--white)}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
 .footer-left{display:flex;align-items:center;gap:16px}
 .footer-brand{font-family:var(--font-display);font-size:24px;letter-spacing:6px;font-weight:400}
@@ -631,10 +715,11 @@ img,iframe,video{max-width:100%}
 .rates-col-header{padding:24px 32px;border-bottom:1px solid var(--rule)}
 .rates-col-header h3{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:0.02em;margin-bottom:4px}
 .rates-col-header p{font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase}
-.rates-row{display:flex;justify-content:space-between;padding:12px 32px;border-bottom:1px solid var(--rule);font-size:14px;transition:background .2s}
+.rates-row{display:flex;justify-content:space-between;padding:12px 32px;border-bottom:1px solid var(--rule);font-size:14px;transition:all .2s}
 .rates-row:hover{background:rgba(255,255,255,0.02)}
 .rates-miles{color:rgba(255,255,255,0.5)}
-.rates-price{color:var(--white);font-weight:500}
+.rates-price{color:var(--white);font-weight:500;font-family:var(--font-display);font-size:18px;letter-spacing:0.02em;transition:all .2s}
+.rates-row:hover .rates-price{letter-spacing:0.04em}
 
 /* ═══════ POLICIES ═══════ */
 #policies{background:var(--black)}
@@ -642,6 +727,10 @@ img,iframe,video{max-width:100%}
 .policy-card{background:var(--dark);padding:36px 32px;transition:all .4s;border-left:2px solid transparent;position:relative;counter-increment:policy}
 .policy-card::before{content:counter(policy,decimal-leading-zero);font-family:var(--font-display);font-size:48px;font-weight:300;color:rgba(255,255,255,0.06);position:absolute;top:16px;right:20px;line-height:1}
 .policy-card:hover{background:var(--dark2);border-left-color:rgba(255,255,255,0.2)}
+.policy-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:16px;transition:all .3s}
+.policy-icon svg{width:18px;height:18px;color:rgba(255,255,255,0.5);transition:all .3s}
+.policy-card:hover .policy-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);transform:scale(1.1)}
+.policy-card:hover .policy-icon svg{color:var(--white)}
 .policy-card h4{font-family:var(--font-display);font-size:22px;font-weight:500;letter-spacing:0.02em;margin-bottom:12px}
 .policy-card p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.75}
 
@@ -746,10 +835,10 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
       <p>Newport Exotics was built by car people, for car people. Based in Costa Mesa — minutes from Newport Beach — we deliver an exotic car experience that's personal, transparent, and unforgettable across Orange County, Los Angeles, and San Diego.</p>
       <p>Every vehicle in our 50+ fleet is hand-selected, meticulously maintained, and detailed to showroom standard before every rental. Our PPF and wrap division brings that same obsession to protecting and transforming your own vehicle.</p>
       <div class="about-values">
-        <div class="about-value"><h4>EXCLUSIVITY</h4><p>A curated fleet you won't find anywhere else in Southern California.</p></div>
-        <div class="about-value"><h4>QUALITY</h4><p>Every car is inspected and detailed before every single rental.</p></div>
-        <div class="about-value"><h4>PRECISION</h4><p>Every detail is accounted for — from prep to handoff.</p></div>
-        <div class="about-value"><h4>TRANSPARENCY</h4><p>Clear communication from first inquiry to final return. No surprises.</p></div>
+        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>EXCLUSIVITY</h4><p>A curated fleet you won't find anywhere else in Southern California.</p></div>
+        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>QUALITY</h4><p>Every car is inspected and detailed before every single rental.</p></div>
+        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>PRECISION</h4><p>Every detail is accounted for — from prep to handoff.</p></div>
+        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>TRANSPARENCY</h4><p>Clear communication from first inquiry to final return. No surprises.</p></div>
       </div>
     </div>
     <div class="about-visual reveal reveal-delay-1">
@@ -810,6 +899,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 </section>
 
 
+
 <section id="fleet" aria-label="Vehicle inventory">
   <div class="fleet-header reveal">
     <div>
@@ -837,7 +927,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="fleet-show-all" id="fleetShowAll" style="text-align:center;margin-top:48px"></div>
 </section>
 
-<!-- divider -->
+<div class="section-divider"></div>
 
 <!-- DELIVERY RATES -->
 <section id="rates" aria-label="Delivery Rates">
@@ -878,7 +968,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   </div>
 </section>
 
-<!-- divider -->
+<div class="section-divider"></div>
 
 <!-- POLICIES -->
 <section id="policies" aria-label="Company Policies">
@@ -887,38 +977,47 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <div class="section-sub reveal">Additional fees and guidelines for deliveries and rentals.</div>
   <div class="policies-grid reveal">
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <h4>Driver Return Ride</h4>
       <p>Always paid by client or broker — Uber/Lyft back to 2136 Newport Blvd, Costa Mesa.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <h4>After-Hours Delivery</h4>
       <p>Deliveries between 8 PM – 8 AM incur an additional $25 fee to the driver.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
       <h4>Multiple-Car Deliveries</h4>
       <p>Each vehicle is charged separately at the full delivery rate.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
       <h4>Wait Time</h4>
       <p>$1.50 per minute after a 15-minute delay at the drop-off location.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
       <h4>Enclosed Trailer</h4>
       <p>For exotic deliveries over 50 miles — additional $150 – $250 flat rate.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
       <h4>Airport Drop-offs</h4>
       <p>LAX, BUR, SNA — additional $25 parking and coordination fee.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <h4>Brokering Partners</h4>
       <p>Must pay full driver rate and driver's return fare. No exceptions.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <h4>Insurance Required</h4>
       <p>Full coverage auto insurance required. Supplemental coverage options available on request.</p>
     </div>
     <div class="policy-card">
+      <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
       <h4>Minimum Age</h4>
       <p>Must be 25+ years old with a valid driver's license to rent.</p>
     </div>
@@ -926,17 +1025,17 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 </section>
 
 
-<!-- divider -->
+<div class="section-divider"></div>
 
 <section id="testimonials" aria-label="Customer Reviews" style="background:var(--black)">
   <div class="section-tag reveal">What Clients Say</div>
   <h2 class="section-title reveal">TESTIMONIALS</h2>
   <div class="testimonials-carousel reveal">
-    <button class="testi-arrow testi-prev" onclick="testiPrev()" aria-label="Previous testimonial">←</button>
+    <button class="testi-arrow testi-prev" onclick="testiPrev()" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M15 18l-6-6 6-6"/></svg></button>
     <div class="testi-track-wrap">
       <div class="testi-track" id="testiTrack">
         <div class="testimonial-card">
-          <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg></div>
           <p class="testimonial-text">"Competitive pricing, immaculate cars, and service that actually delivers. Shoutout to Tejas and Yousef — these are the guys you want in your corner. Best brokers in the game, period."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">DK</div>
@@ -944,7 +1043,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           </div>
         </div>
         <div class="testimonial-card">
-          <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg></div>
           <p class="testimonial-text">"Got my husband a Urus for our anniversary and it honestly made the whole day. He absolutely loved it, definitely won't be the last time we book with them."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">MJ</div>
@@ -952,7 +1051,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           </div>
         </div>
         <div class="testimonial-card">
-          <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg></div>
           <p class="testimonial-text">"Most consistent service and communication I've experienced from an exotic rental company especially out here in OC. These guys set the standard."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">JL</div>
@@ -960,7 +1059,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           </div>
         </div>
         <div class="testimonial-card">
-          <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg></div>
           <p class="testimonial-text">"The guys at the event were obsessed with the Huracan. Huge thanks for taking care of me! Smoothest pickup and drop-off process I've ever had with a rental company. Will 100% be back next month."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">SK</div>
@@ -968,7 +1067,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           </div>
         </div>
         <div class="testimonial-card">
-          <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg><svg viewBox="0 0 24 24" width="16" height="16"><polygon points="12 2 15 8 22 9 17 14 18 21 12 18 6 21 7 14 2 9 9 8" fill="currentColor"/></svg></div>
           <p class="testimonial-text">"Best price point for the caliber of the car and level of service you get. Genuinely hard to beat. Already planning my next rental, I'll be in and out."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">GF</div>
@@ -977,28 +1076,16 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
         </div>
       </div>
     </div>
-    <button class="testi-arrow testi-next" onclick="testiNext()" aria-label="Next testimonial">→</button>
+    <button class="testi-arrow testi-next" onclick="testiNext()" aria-label="Next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M9 18l6-6-6-6"/></svg></button>
   </div>
 </section>
 
-<!-- divider -->
+<div class="section-divider"></div>
 
 <section id="contact" aria-label="Contact Newport Exotics">
   <div class="section-tag reveal">Get In Touch</div>
   <h2 class="section-title reveal">CONTACT US</h2>
-  <div class="contact-grid reveal">
-    <div class="contact-info">
-      <div class="contact-info-top">
-        <p>Whether it's a rental inquiry, a PPF quote, or just a question — we respond fast. Usually within a few hours.</p>
-      </div>
-      <div class="contact-blocks">
-        <div class="contact-block"><h4>PHONE</h4><a href="tel:+19497015955">(949) 701-5955</a></div>
-        <div class="contact-block"><h4>LOCATION</h4><p>2136 Newport Blvd<br>Costa Mesa, CA 92627</p></div>
-        <div class="contact-block"><h4>EMAIL</h4><a href="mailto:newportbeachexotics@gmail.com">newportbeachexotics@gmail.com</a></div>
-        <div class="contact-block"><h4>INSTAGRAM</h4><a href="https://instagram.com/newportexotics_" target="_blank" rel="noopener noreferrer">@newportexotics_</a></div>
-        <div class="contact-block"><h4>HOURS</h4><p>Mon – Sat: 9AM – 5PM<br>Sun: 1PM – 3PM</p></div>
-      </div>
-    </div>
+  <div class="contact-layout reveal">
     <form class="contact-form" onsubmit="handleSubmit(event)" aria-label="Contact form">
       <div class="form-row">
         <div class="form-field"><label for="fname">First Name</label><input id="fname" type="text" name="first_name" placeholder="John" required autocomplete="given-name"></div>
@@ -1059,16 +1146,31 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
       </div>
       <button type="submit" class="form-submit">Send Inquiry →</button>
     </form>
+    <div class="contact-right">
+      <div class="contact-map">
+        <iframe title="Newport Exotics location at 2136 Newport Blvd, Costa Mesa, CA" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.5!2d-117.9187!3d33.6412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd7e5b8c0b0b%3A0x1!2s2136+Newport+Blvd%2C+Costa+Mesa%2C+CA+92627!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="contact-cards">
+        <a href="tel:+19497015955" class="contact-card">
+          <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h4>PHONE</h4><p>(949) 701-5955</p></div>
+        </a>
+        <div class="contact-card">
+          <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>LOCATION</h4><p>2136 Newport Blvd<br>Costa Mesa, CA 92627</p></div>
+        </div>
+        <a href="mailto:newportbeachexotics@gmail.com" class="contact-card">
+          <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><h4>EMAIL</h4><p>newportbeachexotics@gmail.com</p></div>
+        </a>
+        <div class="contact-card">
+          <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><h4>HOURS</h4><p>Mon – Sat: 9AM – 5PM<br>Sun: 1PM – 3PM</p></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-
-<!-- MAP -->
-<div class="map-section">
-  <div class="map-container">
-    <!-- Replace this iframe src with your actual Google Maps embed code -->
-    <iframe title="Newport Exotics location at 2136 Newport Blvd, Costa Mesa, CA" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.5!2d-117.9187!3d33.6412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd7e5b8c0b0b%3A0x1!2s2136+Newport+Blvd%2C+Costa+Mesa%2C+CA+92627!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-</div>
 </main>
 
 <!-- PRIVACY POLICY MODAL -->
@@ -1098,6 +1200,12 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 </div>
 
 <footer role="contentinfo">
+  <div class="footer-top">
+    <a href="#" class="back-to-top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M18 15l-6-6-6 6"/></svg>
+      <span>Back to Top</span>
+    </a>
+  </div>
   <div class="footer-inner">
     <div class="footer-left">
       <span class="footer-brand">NEX</span>
@@ -1111,8 +1219,9 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
       <a href="#contact">Contact</a>
     </div>
     <div class="footer-social">
-      <a href="https://instagram.com/newportexotics_" target="_blank" rel="noopener noreferrer" aria-label="Follow Newport Exotics on Instagram">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      <a href="https://instagram.com/newportexotics_" target="_blank" rel="noopener noreferrer" aria-label="Follow Newport Exotics on Instagram" class="footer-ig-cta">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        <span>@newportexotics_</span>
       </a>
     </div>
   </div>
@@ -1399,6 +1508,17 @@ function fleetViewAll(){var y=window.scrollY;viewState='all';renderFleet();windo
 function fleetCollapse(){viewState='initial';renderFleet();document.getElementById('fleet').scrollIntoView({behavior:'smooth'});}
 
 renderFleet();
+
+// Add count badges to fleet filter buttons
+(function(){
+  var cats={all:fleet.length,supercar:0,luxury:0,suv:0,sport:0,ev:0};
+  fleet.forEach(function(c){if(cats[c.cat]!==undefined)cats[c.cat]++;});
+  document.querySelectorAll('.fleet-filter').forEach(function(btn){
+    var cat=btn.textContent.trim();
+    var key=cat==='All'?'all':cat==='Supercars'?'supercar':cat==='Luxury'?'luxury':cat==='SUV'?'suv':cat==='Sport'?'sport':'ev';
+    btn.innerHTML=cat+' <span style="font-size:9px;opacity:0.4;margin-left:4px">'+cats[key]+'</span>';
+  });
+})();
 
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
