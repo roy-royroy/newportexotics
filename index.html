@@ -59,10 +59,7 @@ opacity:.5;filter:blur(25px)}
 #testimonials::before{width:700px;height:400px}
 
 /* FLEET CARD HOVER GLOW */
-.fleet-card::after{content:'';position:absolute;inset:0;z-index:2;opacity:0;
-background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent,rgba(255,255,255,0.04));
-transition:opacity .5s;pointer-events:none}
-.fleet-card:hover::after{opacity:1}
+.fleet-card::after{display:none}
 
 /* FLEET CARD IMAGE SHINE */
 .fleet-card-img::before{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;
@@ -128,10 +125,7 @@ background:radial-gradient(ellipse,rgba(255,255,255,0.015),transparent 70%)}
 #contact::before{width:700px;height:500px;top:-150px}
 
 /* FLEET CARD HOVER GLOW */
-.fleet-card::before{content:'';position:absolute;inset:0;z-index:2;opacity:0;
-background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent,rgba(255,255,255,0.04));
-transition:opacity .6s ease;pointer-events:none}
-.fleet-card:hover::before{opacity:1}
+.fleet-card::before{display:none}
 
 /* FLEET CARD IMAGE SHINE */
 .fleet-card-img::before{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;
@@ -284,7 +278,7 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .fleet-filter{padding:10px 24px;border:1px solid rgba(255,255,255,0.08);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:all .4s;cursor:pointer;background:none}
 .fleet-filter.active,.fleet-filter:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,0.04)}
 .fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative;z-index:1}
-.fleet-card{background:var(--dark2);border:none;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;cursor:pointer;contain:layout style}
+.fleet-card{background:var(--dark2);border:none;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;cursor:pointer}
 .fleet-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.6)}
 .fleet-card-img{height:300px;background:var(--dark2);position:relative;overflow:hidden;margin-bottom:-1px}
 .fleet-card-img img{width:100%;height:100%;object-fit:cover;opacity:.6;transition:all .6s cubic-bezier(.16,1,.3,1)}
