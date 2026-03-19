@@ -431,7 +431,7 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 /* ═══════ CONTACT ═══════ */
 #contact{background:var(--dark)}
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px}
-.contact-form{display:flex;flex-direction:column;gap:0;padding:0;background:transparent;border:1px solid var(--rule)}
+.contact-form{display:flex;flex-direction:column;gap:0;padding:0;background:transparent;border:1px solid var(--rule);overflow:visible;position:relative}
 .contact-right{display:flex;flex-direction:column;gap:2px}
 .contact-map{height:360px;overflow:hidden;border:1px solid var(--rule)}
 .contact-map iframe{width:100%;height:100%;border:0;filter:grayscale(0.3) brightness(0.9)}
@@ -445,20 +445,21 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .contact-card h4{font-family:var(--font-body);font-size:10px;letter-spacing:3px;font-weight:600;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:4px}
 .contact-card p{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.5}
 .form-row{display:flex;gap:0}
-.form-field{flex:1;display:flex;flex-direction:column;gap:0}
+.form-field{flex:1;display:flex;flex-direction:column;gap:0;position:relative}
 .form-field label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);padding:18px 20px 8px;font-weight:600}
 .form-field input,.form-field textarea{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.05);padding:14px 20px 18px;color:var(--white);font-family:var(--font-body);font-size:17px;transition:all .4s;outline:none;font-weight:400}
 .form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.3)}
 .form-row .form-field:last-child input{border-right:none}
 .form-field input:focus,.form-field textarea:focus{background:rgba(255,255,255,0.03);border-bottom-color:rgba(255,255,255,0.3)}
 .form-field textarea{resize:none;min-height:140px;border-right:none}
-.custom-select{position:relative;border-bottom:1px solid rgba(255,255,255,0.1);background:transparent}
+.custom-select{position:relative;border-bottom:1px solid rgba(255,255,255,0.1);background:transparent;z-index:50}
+.custom-select.open{z-index:200}
 .custom-select-selected{padding:14px 20px 18px;color:rgba(255,255,255,0.35);font-family:var(--font-body);font-size:17px;font-weight:400;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .3s;user-select:none}
 .custom-select-selected.chosen{color:var(--white)}
 .custom-select-selected svg{opacity:.3;transition:transform .4s,opacity .3s;flex-shrink:0}
 .custom-select.open .custom-select-selected{background:rgba(255,255,255,0.02)}
 .custom-select.open .custom-select-selected svg{transform:rotate(180deg);opacity:.7}
-.custom-select-options{position:absolute;top:100%;left:0;right:0;background:var(--dark3);border:1px solid rgba(255,255,255,0.08);border-top:none;z-index:100;display:none;overflow:hidden}
+.custom-select-options{position:absolute;top:100%;left:0;right:0;background:var(--dark3);border:1px solid rgba(255,255,255,0.08);border-top:none;z-index:200;display:none;overflow:hidden}
 .custom-select.open .custom-select-options{display:block}
 .custom-select-option{padding:16px 20px;font-size:16px;color:rgba(255,255,255,0.6);cursor:pointer;transition:all .2s;font-family:var(--font-body)}
 .custom-select-option:hover{background:rgba(255,255,255,0.04);color:var(--white)}
@@ -1260,101 +1261,101 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 <script>
 const fleet=[
 // Lamborghini
-{brand:'Lamborghini',name:'Urus',year:'2021',cat:'supercar',type:'SUV',color:'Red',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus',year:'2022',cat:'supercar',type:'SUV',color:'Purple',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus',year:'2019',cat:'supercar',type:'SUV',color:'Yellow w/ Yellow Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Blue / White Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Red / Black & Red Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Black / White Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus Performante',year:'2024',cat:'supercar',type:'SUV',color:'Wolf Gray / Carbon Exterior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus S',year:'2025',cat:'supercar',type:'SUV',color:'Black / Yellow Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Urus (Liberty Walk)',year:'2021',cat:'supercar',type:'SUV',color:'Matte Gray / Brown Interior',img:'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=600&q=65'},
-{brand:'Lamborghini',name:'Huracán EVO Spyder',year:'2023',cat:'supercar',type:'Convertible',color:'Black / Black & Red Interior',img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=65'},
-{brand:'Lamborghini',name:'Huracán EVO Spyder',year:'2024',cat:'supercar',type:'Convertible',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=65'},
-{brand:'Lamborghini',name:'Huracán LP 610 BRG',year:'2015',cat:'supercar',type:'Coupe',color:'Red Interior / Carbon',img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=65'},
-{brand:'Lamborghini',name:'Huracán EVO',year:'2020',cat:'supercar',type:'Coupe',color:'Coming Soon',img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=65'},
+{brand:'Lamborghini',name:'Urus',year:'2021',cat:'supercar',type:'SUV',color:'Red',img:'redurus2021.png'},
+{brand:'Lamborghini',name:'Urus',year:'2022',cat:'supercar',type:'SUV',color:'Purple',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Urus',year:'2019',cat:'supercar',type:'SUV',color:'Yellow w/ Yellow Interior',img:'yellowurus.png'},
+{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Blue / White Interior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Red / Black & Red Interior',img:'redurus2023.png'},
+{brand:'Lamborghini',name:'Urus',year:'2023',cat:'supercar',type:'SUV',color:'Black / White Interior',img:'blackurusperf.png'},
+{brand:'Lamborghini',name:'Urus Performante',year:'2024',cat:'supercar',type:'SUV',color:'Wolf Gray / Carbon Exterior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Urus S',year:'2025',cat:'supercar',type:'SUV',color:'Black / Yellow Interior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Urus (Liberty Walk)',year:'2021',cat:'supercar',type:'SUV',color:'Matte Gray / Brown Interior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Huracán EVO Spyder',year:'2023',cat:'supercar',type:'Convertible',color:'Black / Black & Red Interior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Huracán EVO Spyder',year:'2024',cat:'supercar',type:'Convertible',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Huracán LP 610 BRG',year:'2015',cat:'supercar',type:'Coupe',color:'Red Interior / Carbon',img:'LOGO_NEX.png'},
+{brand:'Lamborghini',name:'Huracán EVO',year:'2020',cat:'supercar',type:'Coupe',color:'Coming Soon',img:'LOGO_NEX.png'},
 // Rolls-Royce
-{brand:'Rolls-Royce',name:'Cullinan',year:'2023',cat:'luxury',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?w=600&q=65'},
-{brand:'Rolls-Royce',name:'Cullinan',year:'2023',cat:'luxury',type:'SUV',color:'White / Black Interior',img:'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?w=600&q=65'},
-{brand:'Rolls-Royce',name:'Cullinan',year:'2022',cat:'luxury',type:'SUV',color:'White & Black',img:'https://images.unsplash.com/photo-1631295868223-63265b40d9e4?w=600&q=65'},
-{brand:'Rolls-Royce',name:'Ghost',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1563720223185-11003d516935?w=600&q=65'},
+{brand:'Rolls-Royce',name:'Cullinan',year:'2023',cat:'luxury',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Rolls-Royce',name:'Cullinan',year:'2023',cat:'luxury',type:'SUV',color:'White / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Rolls-Royce',name:'Cullinan',year:'2022',cat:'luxury',type:'SUV',color:'White & Black',img:'LOGO_NEX.png'},
+{brand:'Rolls-Royce',name:'Ghost',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'LOGO_NEX.png'},
 // Maybach
-{brand:'Maybach',name:'GLS-600',year:'2025',cat:'luxury',type:'SUV',color:'Black & Silver / Black Interior',img:'https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=600&q=65'},
-{brand:'Maybach',name:'GLS-600',year:'2024',cat:'luxury',type:'SUV',color:'Blue / Black Interior',img:'https://images.unsplash.com/photo-1606611013016-969c19ba27a5?w=600&q=65'},
-{brand:'Maybach',name:'S580 Night Series',year:'2025',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Maybach',name:'S580',year:'2025',cat:'luxury',type:'Sedan',color:'Silver & Green / White Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
+{brand:'Maybach',name:'GLS-600',year:'2025',cat:'luxury',type:'SUV',color:'Black & Silver / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Maybach',name:'GLS-600',year:'2024',cat:'luxury',type:'SUV',color:'Blue / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Maybach',name:'S580 Night Series',year:'2025',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Maybach',name:'S580',year:'2025',cat:'luxury',type:'Sedan',color:'Silver & Green / White Interior',img:'LOGO_NEX.png'},
 // Mercedes-Benz
-{brand:'Mercedes-Benz',name:'S580',year:'2023',cat:'luxury',type:'Sedan',color:'White / Red Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'S580',year:'2024',cat:'luxury',type:'Sedan',color:'Burgundy / White Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'S580',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'S580',year:'2023',cat:'luxury',type:'Sedan',color:'Coming Soon',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'G 550',year:'2025',cat:'luxury',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG G63',year:'2023',cat:'luxury',type:'SUV',color:'Matte Black / Red Interior',img:'https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG G63',year:'2023',cat:'luxury',type:'SUV',color:'Black / Red Interior',img:'https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG G63',year:'2022',cat:'luxury',type:'SUV',color:'Arabian Grey / White Interior',img:'https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'G63',year:'2021',cat:'luxury',type:'SUV',color:'Black / White Interior',img:'https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG GLE 53',year:'2024',cat:'sport',type:'SUV',color:'Arabian Gray / Red Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG GLE 53 x2',year:'2025',cat:'sport',type:'SUV',color:'Black / Red Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'GLE53',year:'2023',cat:'sport',type:'SUV',color:'Matte Black',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'GLS SUV',year:'2023',cat:'luxury',type:'SUV',color:'Black',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'AMG C43',year:'2023',cat:'sport',type:'Sedan',color:'Silver / Red Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
-{brand:'Mercedes-Benz',name:'C300',year:'2023',cat:'sport',type:'Sedan',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
+{brand:'Mercedes-Benz',name:'S580',year:'2023',cat:'luxury',type:'Sedan',color:'White / Red Interior',img:'s580white.png'},
+{brand:'Mercedes-Benz',name:'S580',year:'2024',cat:'luxury',type:'Sedan',color:'Burgundy / White Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'S580',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Black Interior',img:'s580black.png'},
+{brand:'Mercedes-Benz',name:'S580',year:'2023',cat:'luxury',type:'Sedan',color:'Coming Soon',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'G 550',year:'2025',cat:'luxury',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'AMG G63',year:'2023',cat:'luxury',type:'SUV',color:'Matte Black / Red Interior',img:'g63matte.png'},
+{brand:'Mercedes-Benz',name:'AMG G63',year:'2023',cat:'luxury',type:'SUV',color:'Black / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'AMG G63',year:'2022',cat:'luxury',type:'SUV',color:'Arabian Grey / White Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'G63',year:'2021',cat:'luxury',type:'SUV',color:'Black / White Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'AMG GLE 53',year:'2024',cat:'sport',type:'SUV',color:'Arabian Gray / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'AMG GLE 53 x2',year:'2025',cat:'sport',type:'SUV',color:'Black / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'GLE53',year:'2023',cat:'sport',type:'SUV',color:'Matte Black',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'GLS SUV',year:'2023',cat:'luxury',type:'SUV',color:'Black',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'AMG C43',year:'2023',cat:'sport',type:'Sedan',color:'Silver / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Mercedes-Benz',name:'C300',year:'2023',cat:'sport',type:'Sedan',color:'Black / Black Interior',img:'LOGO_NEX.png'},
 // BMW
-{brand:'BMW',name:'M4 Competition Convertible',year:'2025',cat:'sport',type:'Convertible',color:'Blue / White Interior',img:'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=65'},
-{brand:'BMW',name:'M4 Competition Convertible',year:'2025',cat:'sport',type:'Convertible',color:'Gray / Red Interior',img:'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=65'},
-{brand:'BMW',name:'X6 M-Sport',year:'2024',cat:'sport',type:'SUV',color:'Brooklyn Gray / Red Interior',img:'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=65'},
-{brand:'BMW',name:'M3 Comp',year:'2024',cat:'sport',type:'Sedan',color:'Blue / Carbon Fiber',img:'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=65'},
-{brand:'BMW',name:'M2 Comp',year:'2024',cat:'sport',type:'Coupe',color:'Red / Carbon Fiber',img:'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=65'},
+{brand:'BMW',name:'M4 Competition Convertible',year:'2025',cat:'sport',type:'Convertible',color:'Blue / White Interior',img:'LOGO_NEX.png'},
+{brand:'BMW',name:'M4 Competition Convertible',year:'2025',cat:'sport',type:'Convertible',color:'Gray / Red Interior',img:'LOGO_NEX.png'},
+{brand:'BMW',name:'X6 M-Sport',year:'2024',cat:'sport',type:'SUV',color:'Brooklyn Gray / Red Interior',img:'LOGO_NEX.png'},
+{brand:'BMW',name:'M3 Comp',year:'2024',cat:'sport',type:'Sedan',color:'Blue / Carbon Fiber',img:'m3.png'},
+{brand:'BMW',name:'M2 Comp',year:'2024',cat:'sport',type:'Coupe',color:'Red / Carbon Fiber',img:'LOGO_NEX.png'},
 // Porsche
-{brand:'Porsche',name:'Cayenne',year:'2025',cat:'sport',type:'SUV',color:'White / Black Interior',img:'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&q=65'},
-{brand:'Porsche',name:'911 Convertible',year:'2025',cat:'supercar',type:'Convertible',color:'Black / Red Interior',img:'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&q=65'},
-{brand:'Porsche',name:'911 Coupe',year:'2025',cat:'supercar',type:'Coupe',color:'Black / Red Interior',img:'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&q=65'},
-{brand:'Porsche',name:'911 Carrera (GT3 Kit)',year:'2014',cat:'supercar',type:'Coupe',color:'White',img:'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=600&q=65'},
-{brand:'Porsche',name:'Macan',year:'2022',cat:'sport',type:'SUV',color:'Blue / Turbo Wheels',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=65'},
-{brand:'Porsche',name:'Taycan',year:'2024',cat:'ev',type:'Sedan',color:'Red & Black',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=65'},
-{brand:'Porsche',name:'Panamera',year:'2023',cat:'sport',type:'Sedan',color:'Black',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=65'},
+{brand:'Porsche',name:'Cayenne',year:'2025',cat:'sport',type:'SUV',color:'White / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Porsche',name:'911 Convertible',year:'2025',cat:'supercar',type:'Convertible',color:'Black / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Porsche',name:'911 Coupe',year:'2025',cat:'supercar',type:'Coupe',color:'Black / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Porsche',name:'911 Carrera (GT3 Kit)',year:'2014',cat:'supercar',type:'Coupe',color:'White',img:'LOGO_NEX.png'},
+{brand:'Porsche',name:'Macan',year:'2022',cat:'sport',type:'SUV',color:'Blue / Turbo Wheels',img:'LOGO_NEX.png'},
+{brand:'Porsche',name:'Taycan',year:'2024',cat:'ev',type:'Sedan',color:'Red & Black',img:'taycan.png'},
+{brand:'Porsche',name:'Panamera',year:'2023',cat:'sport',type:'Sedan',color:'Black',img:'LOGO_NEX.png'},
 // Ferrari
-{brand:'Ferrari',name:'F8 Tributo',year:'2022',cat:'supercar',type:'Coupe',color:'Red',img:'https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=600&q=65'},
+{brand:'Ferrari',name:'F8 Tributo',year:'2022',cat:'supercar',type:'Coupe',color:'Red',img:'f8.png'},
 // McLaren
-{brand:'McLaren',name:'570S Spyder',year:'2018',cat:'supercar',type:'Convertible',color:'Voodoo Blue / Carbon',img:'https://images.unsplash.com/photo-1621993202323-f438eec934ff?w=600&q=65'},
+{brand:'McLaren',name:'570S Spyder',year:'2018',cat:'supercar',type:'Convertible',color:'Voodoo Blue / Carbon',img:'mclaren.png'},
 // Aston Martin
-{brand:'Aston Martin',name:'DBX',year:'2023',cat:'supercar',type:'SUV',color:'Yellow w/ Yellow Interior',img:'https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=600&q=65'},
-{brand:'Aston Martin',name:'DB11',year:'2021',cat:'supercar',type:'Convertible',color:'Baby Blue / Dark Blue Interior',img:'https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=600&q=65'},
+{brand:'Aston Martin',name:'DBX',year:'2023',cat:'supercar',type:'SUV',color:'Yellow w/ Yellow Interior',img:'LOGO_NEX.png'},
+{brand:'Aston Martin',name:'DB11',year:'2021',cat:'supercar',type:'Convertible',color:'Baby Blue / Dark Blue Interior',img:'LOGO_NEX.png'},
 // Bentley
-{brand:'Bentley',name:'Flying Spur Azure',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Brown Interior',img:'https://images.unsplash.com/photo-1563720223185-11003d516935?w=600&q=65'},
+{brand:'Bentley',name:'Flying Spur Azure',year:'2024',cat:'luxury',type:'Sedan',color:'Black / Brown Interior',img:'LOGO_NEX.png'},
 // Audi
-{brand:'Audi',name:'Q8 S-Line',year:'2024',cat:'sport',type:'SUV',color:'SandStorm / Black Interior',img:'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&q=65'},
-{brand:'Audi',name:'R8',year:'2017',cat:'supercar',type:'Coupe',color:'Matte Black',img:'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&q=65'},
+{brand:'Audi',name:'Q8 S-Line',year:'2024',cat:'sport',type:'SUV',color:'SandStorm / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Audi',name:'R8',year:'2017',cat:'supercar',type:'Coupe',color:'Matte Black',img:'audi.png'},
 // Cadillac
-{brand:'Cadillac',name:'Escalade ESV x6',year:'2025',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Cadillac',name:'Escalade',year:'2024',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Cadillac',name:'Escalade',year:'2023',cat:'suv',type:'SUV',color:'Black',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
+{brand:'Cadillac',name:'Escalade ESV x6',year:'2025',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Cadillac',name:'Escalade',year:'2024',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Cadillac',name:'Escalade',year:'2023',cat:'suv',type:'SUV',color:'Black',img:'LOGO_NEX.png'},
 // Chevrolet
-{brand:'Chevrolet',name:'Corvette C8',year:'2024',cat:'sport',type:'Coupe',color:'Red / Black Interior',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=65'},
-{brand:'Chevrolet',name:'Corvette C8',year:'2025',cat:'sport',type:'Coupe',color:'Baby Blue / Black Interior',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=65'},
-{brand:'Chevrolet',name:'Corvette C8 Z06',year:'2025',cat:'sport',type:'Coupe',color:'Green / Red Interior',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=65'},
-{brand:'Chevrolet',name:'Corvette C8',year:'2024',cat:'sport',type:'Coupe',color:'Blue',img:'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=65'},
-{brand:'Chevrolet',name:'Suburban',year:'2023',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
+{brand:'Chevrolet',name:'Corvette C8',year:'2024',cat:'sport',type:'Coupe',color:'Red / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Chevrolet',name:'Corvette C8',year:'2025',cat:'sport',type:'Coupe',color:'Baby Blue / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Chevrolet',name:'Corvette C8 Z06',year:'2025',cat:'sport',type:'Coupe',color:'Green / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Chevrolet',name:'Corvette C8',year:'2024',cat:'sport',type:'Coupe',color:'Blue',img:'LOGO_NEX.png'},
+{brand:'Chevrolet',name:'Suburban',year:'2023',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
 // Genesis
-{brand:'Genesis',name:'GV70',year:'2023',cat:'sport',type:'SUV',color:'Matte Gray / Red Interior',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=65'},
+{brand:'Genesis',name:'GV70',year:'2023',cat:'sport',type:'SUV',color:'Matte Gray / Red Interior',img:'LOGO_NEX.png'},
 // Land Rover
-{brand:'Land Rover',name:'Range Rover SWB',year:'2024',cat:'luxury',type:'SUV',color:'White / White Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover LWB',year:'2025',cat:'luxury',type:'SUV',color:'White / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover LWB',year:'2025',cat:'luxury',type:'SUV',color:'Black / Brown Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover Sport',year:'2023',cat:'sport',type:'SUV',color:'Black / Red Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'White / White Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'Gray / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
-{brand:'Land Rover',name:'Defender',year:'2023',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=65'},
-{brand:'Land Rover',name:'Defender',year:'2024',cat:'suv',type:'SUV',color:'Black / Brown Interior',img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=65'},
-{brand:'Land Rover',name:'Defender',year:'2024',cat:'suv',type:'SUV',color:'White / Black Interior',img:'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=65'},
+{brand:'Land Rover',name:'Range Rover SWB',year:'2024',cat:'luxury',type:'SUV',color:'White / White Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover LWB',year:'2025',cat:'luxury',type:'SUV',color:'White / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover LWB',year:'2025',cat:'luxury',type:'SUV',color:'Black / Brown Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover Sport',year:'2023',cat:'sport',type:'SUV',color:'Black / Red Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'White / White Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Range Rover Sport',year:'2025',cat:'sport',type:'SUV',color:'Gray / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Defender',year:'2023',cat:'suv',type:'SUV',color:'Black / Black Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Defender',year:'2024',cat:'suv',type:'SUV',color:'Black / Brown Interior',img:'LOGO_NEX.png'},
+{brand:'Land Rover',name:'Defender',year:'2024',cat:'suv',type:'SUV',color:'White / Black Interior',img:'LOGO_NEX.png'},
 // Lincoln
-{brand:'Lincoln',name:'Corsair',year:'2024',cat:'suv',type:'SUV',color:'Gray / Black Interior',img:'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=65'},
+{brand:'Lincoln',name:'Corsair',year:'2024',cat:'suv',type:'SUV',color:'Gray / Black Interior',img:'LOGO_NEX.png'},
 // Ford
-{brand:'Ford',name:'Raptor',year:'2025',cat:'suv',type:'Truck',color:'Chalk / Moonroof',img:'https://images.unsplash.com/photo-1551830820-330a71b99659?w=600&q=65'},
-{brand:'Ford',name:'Mustang GT500',year:'2023',cat:'sport',type:'Coupe',color:'Yellow',img:'https://images.unsplash.com/photo-1584345604476-8ec5f82d661f?w=600&q=65'},
+{brand:'Ford',name:'Raptor',year:'2025',cat:'suv',type:'Truck',color:'Chalk / Moonroof',img:'LOGO_NEX.png'},
+{brand:'Ford',name:'Mustang GT500',year:'2023',cat:'sport',type:'Coupe',color:'Yellow',img:'LOGO_NEX.png'},
 // Tesla
-{brand:'Tesla',name:'CyberBeast',year:'2025',cat:'ev',type:'Truck',color:'Gray / Black Interior',img:'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=65'},
+{brand:'Tesla',name:'CyberBeast',year:'2025',cat:'ev',type:'Truck',color:'Gray / Black Interior',img:'cyberbeast.png'},
 ];
 
 // Sort fleet by brand then model
