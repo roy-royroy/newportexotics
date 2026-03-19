@@ -278,14 +278,14 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .fleet-filter{padding:10px 24px;border:1px solid rgba(255,255,255,0.08);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);transition:all .4s;cursor:pointer;background:none}
 .fleet-filter.active,.fleet-filter:hover{border-color:var(--white);color:var(--white);background:rgba(255,255,255,0.04)}
 .fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative;z-index:1}
-.fleet-card{background:var(--dark2);border:none;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;cursor:pointer}
+.fleet-card{background:var(--dark2);border:none;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;cursor:pointer;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:translateZ(0)}
 .fleet-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.6)}
-.fleet-card-img{height:300px;background:var(--dark2);position:relative;overflow:hidden;margin-bottom:-1px}
-.fleet-card-img img{width:100%;height:100%;object-fit:cover;opacity:.6;transition:all .6s cubic-bezier(.16,1,.3,1)}
+.fleet-card-img{height:300px;background:var(--dark2);position:relative;overflow:hidden}
+.fleet-card-img img{width:100%;height:100%;object-fit:cover;opacity:.6;transition:all .6s cubic-bezier(.16,1,.3,1);display:block;vertical-align:bottom}
 .fleet-card:hover .fleet-card-img img{opacity:.85;transform:scale(1.04)}
 .fleet-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--dark2));z-index:1}
 .fleet-card-badge{position:absolute;top:16px;right:16px;padding:5px 14px;z-index:2;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.08)}
-.fleet-card-info{padding:28px 28px 24px}
+.fleet-card-info{padding:28px 28px 24px;background:var(--dark2);position:relative}
 .fleet-card-brand{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;font-weight:500}
 .fleet-card-name{font-family:var(--font-display);font-size:26px;letter-spacing:0.02em;margin-bottom:14px;font-weight:500;line-height:1.1}
 .fleet-card-specs{display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap}
