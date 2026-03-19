@@ -53,11 +53,10 @@ opacity:.5}
 content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);
 width:800px;height:500px;border-radius:50%;pointer-events:none;z-index:0;
 background:radial-gradient(ellipse,rgba(255,255,255,0.03),transparent 70%);
-animation:ambientPulse 6s ease-in-out infinite}
+opacity:.5;filter:blur(25px)}
 #fleet::before{top:auto;bottom:-200px;background:radial-gradient(ellipse,rgba(255,255,255,0.02),transparent 70%)}
 #services::before{width:600px;height:400px;top:-150px}
 #testimonials::before{width:700px;height:400px}
-@keyframes ambientPulse{0%,100%{opacity:.4;filter:blur(20px)}50%{opacity:.8;filter:blur(30px)}}
 
 /* FLEET CARD HOVER GLOW */
 .fleet-card::after{content:'';position:absolute;inset:-1px;z-index:-1;opacity:0;
@@ -305,6 +304,9 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 
 /* ═══════ SERVICES ═══════ */
 #services{background:var(--black);scroll-margin-top:-80px;text-align:center}
+.svc-anim{opacity:0;transform:translateY(28px);transition:opacity .5s ease,transform .5s ease}
+.svc-card.svc-anim{transform:translateY(40px)}
+.svc-anim.svc-in{opacity:1;transform:translateY(0)}
 .svc-wrapper{display:flex;align-items:stretch;max-width:1800px;width:100%;gap:0;position:relative;margin:16px auto 0;justify-content:center}
 .svc-label{display:flex;align-items:center;justify-content:center;width:80px;min-width:80px;position:relative}
 .svc-label span{font-family:var(--font-display);font-weight:300;font-size:80px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(200,195,185,0.35);writing-mode:vertical-lr;transform:rotate(180deg);white-space:nowrap;user-select:none;line-height:1}
@@ -355,15 +357,15 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .about-heading.anim-in{transform:translateX(0)}
 .about-stat-item.about-anim{transform:scale(0.85)}
 .about-stat-item.anim-in{transform:scale(1)}
-.about-main-card{position:relative;width:100%;max-width:1800px;margin:0 auto;min-height:800px;border-radius:32px;overflow:visible;box-shadow:0 30px 90px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.06);background:rgba(15,15,25,0.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:40px}
+.about-main-card{position:relative;width:100%;max-width:1800px;margin:0 auto;min-height:800px;border-radius:32px;overflow:visible;box-shadow:0 20px 60px rgba(0,0,0,0.5);background:rgba(12,12,18,0.92);padding:40px;contain:layout style}
 .about-main-inner{position:relative;width:100%;min-height:800px;border-radius:32px;overflow:hidden}
 .about-bg-image{position:absolute;top:50px;left:450px;right:50px;bottom:50px;width:auto;border-radius:16px;overflow:hidden;background:#0a0a0f}
 .about-bg-image>img{width:100%;height:100%;object-fit:cover;display:block}
 .about-bg-fade{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,15,0.95) 0%,rgba(10,10,15,0.85) 10%,rgba(10,10,15,0.6) 20%,rgba(10,10,15,0.4) 30%,rgba(10,10,15,0.2) 40%,transparent 50%);pointer-events:none}
-.about-bg-image::before{content:'';position:absolute;inset:0;background:linear-gradient(165deg,transparent 0%,rgba(192,192,192,0.03) 40%,rgba(192,192,192,0.08) 100%);z-index:1;pointer-events:none}
+.about-bg-image::before{display:none}
 .about-content-wrap{position:relative;z-index:2;height:100%;min-height:800px;display:flex;align-items:center;padding:70px 80px}
-.about-content-left{max-width:650px;width:100%;background:rgba(20,20,25,0.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:24px;padding:55px 50px;border:1px solid rgba(255,255,255,0.15);box-shadow:0 20px 60px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.1)}
-.about-heading{font-family:var(--font-display);font-size:62px;font-weight:400;letter-spacing:8px;margin-bottom:35px;line-height:1.1;background:linear-gradient(135deg,#fff 0%,#e0e0e0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.about-content-left{max-width:650px;width:100%;background:rgba(18,18,22,0.95);border-radius:24px;padding:55px 50px;border:1px solid rgba(255,255,255,0.15);box-shadow:0 16px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.08);will-change:transform;contain:layout style}
+.about-heading{font-family:var(--font-display);font-size:62px;font-weight:400;letter-spacing:8px;margin-bottom:35px;line-height:1.1;color:var(--white)}
 .about-intro{font-family:var(--font-body);font-size:15px;line-height:1.8;font-weight:500;margin-bottom:18px;color:var(--white)}
 .about-desc{font-family:var(--font-body);font-size:14px;line-height:1.75;color:rgba(255,255,255,0.65);margin-bottom:28px;font-weight:400}
 .about-values-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:40px}
@@ -375,9 +377,7 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .about-val-text p{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,0.65);font-weight:400}
 .about-stats-bar{position:absolute;bottom:50px;left:600px;right:50px;display:flex;align-items:center;justify-content:center;gap:80px;z-index:10}
 .about-stat-item{text-align:center;position:relative}
-.about-stat-item::before{content:'';position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:40px;height:2px;background:linear-gradient(90deg,transparent,rgba(192,192,192,0.5),transparent);opacity:0;transition:opacity .3s}
-.about-stat-item:hover::before{opacity:1}
-.about-stat-number{font-family:var(--font-display);font-size:58px;font-weight:700;line-height:1;margin-bottom:10px;background:linear-gradient(135deg,#fff 0%,#c0c0c0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.about-stat-number{font-family:var(--font-display);font-size:58px;font-weight:700;line-height:1;margin-bottom:10px;color:var(--white)}
 .about-stat-lbl{font-family:var(--font-body);font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.65)}
 @media(max-width:1200px){
 .about-main-card{padding:24px}
@@ -925,7 +925,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
   <h2 class="section-title reveal">SERVICES</h2>
   <div class="svc-wrapper reveal">
     <div class="svc-cards">
-      <div class="svc-card reverse" onclick="window.location.href='#fleet'" style="cursor:pointer">
+      <div class="svc-card reverse svc-anim" data-svc-delay="0" onclick="window.location.href='#fleet'" style="cursor:pointer">
         <div class="svc-img">
           <img src="service1.png" alt="Exotic car available for rent at Newport Exotics" loading="lazy" decoding="async">
         </div>
@@ -933,15 +933,15 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           <h3 class="svc-title">Exotic Car Rentals</h3>
           <p class="svc-desc">Experience the thrill of driving the world's most coveted vehicles. From Lamborghini to Rolls-Royce, our curated fleet of 50+ exotic and luxury cars delivers unforgettable moments on Southern California's most scenic roads.</p>
           <ul class="svc-checklist">
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Daily, weekend &amp; weekly rentals</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Special event &amp; photoshoot packages</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Flexible terms &amp; concierge support</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Pickup from our Costa Mesa location</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Drop-off delivery across Southern California</li>
+            <li class="svc-anim" data-svc-delay="2"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Daily, weekend &amp; weekly rentals</li>
+            <li class="svc-anim" data-svc-delay="3"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Special event &amp; photoshoot packages</li>
+            <li class="svc-anim" data-svc-delay="4"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Flexible terms &amp; concierge support</li>
+            <li class="svc-anim" data-svc-delay="5"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Pickup from our Costa Mesa location</li>
+            <li class="svc-anim" data-svc-delay="6"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Drop-off delivery across Southern California</li>
           </ul>
         </div>
       </div>
-      <div class="svc-card">
+      <div class="svc-card svc-anim" data-svc-delay="1">
         <div class="svc-img">
           <img src="service2.png" alt="Professional PPF and wrap installation" loading="lazy" decoding="async">
         </div>
@@ -949,11 +949,11 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
           <h3 class="svc-title">PPF &amp; Custom Wraps</h3>
           <p class="svc-desc">Protect your investment and elevate your vehicle's aesthetic with our professional paint protection film and custom wrap services. Premium materials, flawless execution, every time.</p>
           <ul class="svc-checklist">
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>XPEL &amp; premium PPF installation</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Full &amp; partial body wraps</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Color change wraps</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Chrome delete &amp; accent work</li>
-            <li><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Ceramic coating add-ons</li>
+            <li class="svc-anim" data-svc-delay="8"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>XPEL &amp; premium PPF installation</li>
+            <li class="svc-anim" data-svc-delay="9"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Full &amp; partial body wraps</li>
+            <li class="svc-anim" data-svc-delay="10"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Color change wraps</li>
+            <li class="svc-anim" data-svc-delay="11"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Chrome delete &amp; accent work</li>
+            <li class="svc-anim" data-svc-delay="12"><span class="svc-check"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></span>Ceramic coating add-ons</li>
           </ul>
         </div>
       </div>
@@ -1937,6 +1937,22 @@ if(testiWrap){
   testiWrap.addEventListener('mouseenter',function(){clearInterval(testiAuto);});
   testiWrap.addEventListener('mouseleave',function(){testiAuto=setInterval(function(){testiNext();},5000);});
 }
+
+// Services section staggered animations
+var svcObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var anims=entry.target.querySelectorAll('.svc-anim');
+      anims.forEach(function(el){
+        var delay=parseInt(el.getAttribute('data-svc-delay'))||0;
+        setTimeout(function(){el.classList.add('svc-in');},delay*80);
+      });
+      svcObs.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+var svcSection=document.getElementById('services');
+if(svcSection)svcObs.observe(svcSection);
 
 // About section staggered animations
 var aboutObs=new IntersectionObserver(function(entries){
