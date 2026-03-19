@@ -323,22 +323,45 @@ section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .service-feature .check{color:rgba(255,255,255,0.25);font-size:12px}
 
 /* ═══════ ABOUT ═══════ */
-#about{background:var(--dark)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:32px}
-.about-text p{font-size:18px;color:rgba(255,255,255,0.7);line-height:2;font-weight:400;margin-bottom:28px}
-.about-values{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px}
-.about-value{padding:32px;border:none;background:rgba(255,255,255,0.015)}
-.about-value-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:20px}
-.about-value-icon svg{width:22px;height:22px;color:rgba(255,255,255,0.6)}
-.about-value:hover .about-value-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
-.about-value:hover .about-value-icon svg{color:var(--white)}
-.about-value h4{font-family:var(--font-display);font-size:22px;letter-spacing:0.04em;margin-bottom:16px;font-weight:600}
-.about-value p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.75;font-weight:400}
-.about-visual{position:relative;height:620px;overflow:hidden}
-.about-visual img{width:100%;height:100%;object-fit:cover;opacity:.6;filter:contrast(1.1) brightness(1.15)}
-.about-visual-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.75));display:flex;flex-direction:column;align-items:center;justify-content:center}
-.about-number{font-family:var(--font-display);font-size:88px;letter-spacing:0.04em;font-weight:400}
-.about-number-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:-2px;font-weight:500}
+#about{background:var(--black);padding-left:0;padding-right:0}
+.about-hero{position:relative;overflow:hidden;border-radius:8px;margin:0 56px}
+.about-hero>img{width:100%;height:100%;object-fit:cover;display:block;min-height:600px}
+.about-glass{position:absolute;top:40px;left:40px;width:480px;max-width:calc(100% - 80px);background:rgba(10,10,10,0.75);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);padding:44px 40px;border:1px solid rgba(255,255,255,0.08);border-radius:6px}
+.about-glass-title{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:400;letter-spacing:0.02em;margin-bottom:20px;line-height:1}
+.about-glass>p{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:12px;font-weight:400}
+.about-glass>p:last-of-type{margin-bottom:24px}
+.about-glass-values{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-glass-value{display:flex;align-items:flex-start;gap:12px}
+.about-glass-value .about-value-icon{width:36px;height:36px;min-width:36px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;margin-top:2px;margin-bottom:0}
+.about-glass-value .about-value-icon svg{width:16px;height:16px;color:rgba(255,255,255,0.6)}
+.about-glass-value h4{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:0.04em;margin-bottom:4px}
+.about-glass-value p{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5}
+.about-stats{position:absolute;bottom:0;right:0;display:flex;gap:0}
+.about-stat{padding:28px 36px;background:rgba(0,0,0,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);text-align:center;border-left:1px solid rgba(255,255,255,0.06)}
+.about-stat:first-child{border-left:none}
+.about-stat-num{font-family:var(--font-display);font-size:clamp(28px,3vw,48px);font-weight:400;letter-spacing:0.03em;line-height:1;margin-bottom:6px}
+.about-stat-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:600}
+@media(max-width:1024px){
+.about-hero{margin:0 24px}
+.about-glass{width:420px;padding:32px 28px}
+.about-stats{position:relative;display:flex;justify-content:center;border-radius:0 0 6px 6px}
+.about-stat{flex:1}
+}
+@media(max-width:768px){
+.about-hero{margin:0 24px}
+.about-hero>img{min-height:auto}
+.about-glass{position:relative;top:auto;left:auto;width:100%;max-width:100%;border-radius:6px 6px 0 0;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--dark2)}
+.about-glass-values{grid-template-columns:1fr}
+.about-stats{flex-wrap:wrap}
+.about-stat{padding:20px 24px;min-width:33%}
+}
+@media(max-width:480px){
+.about-hero{margin:0 20px}
+.about-glass{padding:24px 20px}
+.about-glass-title{font-size:28px}
+.about-stat{padding:16px 12px}
+.about-stat-num{font-size:24px}
+}
 
 /* ═══════ TESTIMONIALS ═══════ */
 #testimonials{background:var(--black)}
@@ -825,31 +848,24 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 </header>
 
 <section id="about" aria-label="About Newport Exotics">
-  <div class="section-tag reveal">Our Story</div>
-  <h2 class="section-title reveal">WHO WE ARE</h2>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>Newport Exotics was built by car people, for car people. Based in Costa Mesa — minutes from Newport Beach — we deliver an exotic car experience that's personal, transparent, and unforgettable across Orange County, Los Angeles, and San Diego.</p>
+  <div class="about-hero reveal">
+    <img src="about.png" alt="Exotic sports car showcasing Newport Exotics premium fleet quality" loading="lazy" decoding="async" width="1400" height="700">
+    <div class="about-glass">
+      <h2 class="about-glass-title">WHO WE ARE</h2>
+      <p>Newport Exotics was built by car people, for car people.</p>
+      <p>Based in Costa Mesa — minutes from Newport Beach — we deliver an exotic car experience that's personal, transparent, and unforgettable across Orange County, Los Angeles, and San Diego.</p>
       <p>Every vehicle in our 50+ fleet is hand-selected, meticulously maintained, and detailed to showroom standard before every rental. Our PPF and wrap division brings that same obsession to protecting and transforming your own vehicle.</p>
-      <div class="about-values">
-        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>EXCLUSIVITY</h4><p>A curated fleet you won't find anywhere else in Southern California.</p></div>
-        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>QUALITY</h4><p>Every car is inspected and detailed before every single rental.</p></div>
-        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>PRECISION</h4><p>Every detail is accounted for — from prep to handoff.</p></div>
-        <div class="about-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h4>TRANSPARENCY</h4><p>Clear communication from first inquiry to final return. No surprises.</p></div>
+      <div class="about-glass-values">
+        <div class="about-glass-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div><h4>EXCLUSIVITY</h4><p>A curated fleet you won't find anywhere else in Southern California.</p></div></div>
+        <div class="about-glass-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>QUALITY</h4><p>Every car is inspected and detailed before every single rental.</p></div></div>
+        <div class="about-glass-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>PRECISION</h4><p>Every detail is accounted for — from prep to handoff.</p></div></div>
+        <div class="about-glass-value"><div class="about-value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div><h4>TRANSPARENCY</h4><p>Clear communication from first inquiry to final return. No surprises.</p></div></div>
       </div>
     </div>
-    <div class="about-visual reveal reveal-delay-1">
-      <img src="about.png" alt="Exotic sports car showcasing Newport Exotics premium fleet quality" loading="lazy" decoding="async" width="800" height="600">
-      <div class="about-visual-overlay">
-        <div class="about-number">50+</div>
-        <div class="about-number-label">Vehicles In Fleet</div>
-        <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);margin:16px auto"></div>
-        <div class="about-number" style="font-size:36px;letter-spacing:4px">OC · LA · SD</div>
-        <div class="about-number-label">Regions Served</div>
-        <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);margin:16px auto"></div>
-        <div class="about-number" style="font-size:48px">24/7</div>
-        <div class="about-number-label">Concierge Support</div>
-      </div>
+    <div class="about-stats">
+      <div class="about-stat"><div class="about-stat-num">50+</div><div class="about-stat-label">Vehicles In Fleet</div></div>
+      <div class="about-stat"><div class="about-stat-num">OC · LA · SD</div><div class="about-stat-label">Regions Served</div></div>
+      <div class="about-stat"><div class="about-stat-num">24/7</div><div class="about-stat-label">Concierge Support</div></div>
     </div>
   </div>
 </section>
@@ -1879,7 +1895,7 @@ function testiNext(){
       testiTrack.style.transition='none';
       testiIndex=0;
       updateTestiTrack();
-    },520);
+    },600);
   }
 }
 function testiPrev(){
@@ -1904,9 +1920,15 @@ function updateTestiTrack(){
   var shift=testiIndex*(100/vis);
   testiTrack.style.transform='translateX(-'+shift+'%)';
 }
-window.addEventListener('resize',function(){
-  updateTestiTrack();
-});
+window.addEventListener('resize',function(){updateTestiTrack();});
+
+var testiAuto=setInterval(function(){testiNext();},5000);
+// Pause on hover
+var testiWrap=document.querySelector('.testimonials-carousel');
+if(testiWrap){
+  testiWrap.addEventListener('mouseenter',function(){clearInterval(testiAuto);});
+  testiWrap.addEventListener('mouseleave',function(){testiAuto=setInterval(function(){testiNext();},5000);});
+}
 
 // Prevent pinch-to-zoom on mobile only
 if('ontouchstart' in window){
