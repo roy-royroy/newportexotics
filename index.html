@@ -218,7 +218,7 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(40px)}
 section{padding:80px 56px;position:relative;scroll-margin-top:-60px}
 .section-tag{font-size:14px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px;font-weight:600}
 .section-title{font-family:var(--font-display);font-size:clamp(40px,5.5vw,72px);letter-spacing:0.02em;margin-bottom:16px;font-weight:400;line-height:1;position:relative;display:inline-block}
-.section-title::after{content:'';display:block;width:60px;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.4),transparent);margin-top:10px}
+.section-title::after{display:none}
 .section-sub{font-size:17px;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.85;font-weight:400}
 .section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent 5%,rgba(255,255,255,0.06) 30%,rgba(255,255,255,0.06) 70%,transparent 95%);margin:0}
 
@@ -789,20 +789,24 @@ img,iframe,video{max-width:100%}
 .rates-row:hover .rates-price{letter-spacing:0.04em}
 
 /* ═══════ POLICIES ═══════ */
-#policies{background:var(--black)}
-.policies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:32px}
-.policy-card{background:var(--dark);padding:36px 32px;transition:all .4s;border-left:2px solid transparent;position:relative}
-.policy-card:hover{background:var(--dark2);border-left-color:rgba(255,255,255,0.2)}
-.policy-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:16px;transition:all .3s}
+#policies{background:var(--black);text-align:center}
+#policies .section-tag{margin-bottom:8px}
+#policies .section-title{margin-bottom:0}
+.policies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+.policy-card{padding:36px 32px;transition:all .4s;position:relative;background:rgba(255,255,255,0.015);text-align:left;border-radius:12px;border:1px solid rgba(192,192,192,0.08);overflow:hidden}
+.policy-card::before{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,rgba(192,192,192,0.3),rgba(255,255,255,0.06) 25%,rgba(140,140,140,0.2) 50%,rgba(255,255,255,0.1) 75%,rgba(192,192,192,0.3));z-index:-1;opacity:0.4;transition:opacity .4s}
+.policy-card:hover::before{opacity:1}
+.policy-card:hover{background:rgba(255,255,255,0.03)}
+.policy-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);margin-bottom:18px;transition:all .3s}
 .policy-icon svg{width:18px;height:18px;color:rgba(255,255,255,0.5);transition:all .3s}
-.policy-card:hover .policy-icon{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);transform:scale(1.1)}
+.policy-card:hover .policy-icon{background:rgba(255,255,255,0.08);border-color:rgba(192,192,192,0.3);transform:scale(1.08)}
 .policy-card:hover .policy-icon svg{color:var(--white)}
-.policy-card h4{font-family:var(--font-display);font-size:22px;font-weight:500;letter-spacing:0.02em;margin-bottom:12px}
-.policy-card p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.75}
+.policy-card h4{font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:0.02em;margin-bottom:10px}
+.policy-card p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.75}
 
 @media(max-width:1024px){
 .rates-grid{grid-template-columns:1fr}
-.policies-grid{grid-template-columns:1fr}
+.policies-grid{grid-template-columns:1fr;gap:10px}
 }
 @media(max-width:768px){
 .inv-search{width:100%}
@@ -998,9 +1002,8 @@ input,select,textarea{max-width:100%;box-sizing:border-box}
 <section id="policies" aria-label="Company Policies">
   <div class="section-tag reveal">Good To Know</div>
   <h2 class="section-title reveal">POLICIES</h2>
-  <div class="section-sub reveal">Additional fees and guidelines for deliveries and rentals.</div>
-  <div class="policies-grid reveal">
-    <div class="policy-card">
+  <div class="policies-grid">
+    <div class="policy-card pol-anim" data-pol-delay="0">
       <div class="policy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <h4>Driver Return Ride</h4>
       <p>Always paid by client or broker — Uber/Lyft back to 2136 Newport Blvd, Costa Mesa.</p>
@@ -1727,7 +1730,7 @@ function toggleFaq(el){
 }
 // ═══ FORMSPREE ENDPOINT ═══
 // Replace this with your Formspree endpoint URL from https://formspree.io
-var FORMSPREE_URL='https://formspree.io/f/YOUR_FORM_ID';
+var FORMSPREE_URL='https://formspree.io/f/xqeywvzp';
 
 function handleSubmit(e){
   e.preventDefault();
